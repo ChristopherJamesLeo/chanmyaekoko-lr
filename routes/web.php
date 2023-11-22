@@ -9,6 +9,7 @@ use App\Http\Controllers\MainPortfolioController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShowDashboardController;
 use App\Http\Controllers\SkillsController;
+use App\Http\Controllers\ServicesController;
 
 
 /*
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("/educations",EducationController::class);
     Route::resource("/skills",SkillsController::class);
     Route::resource("/experiences",ExperiencesController::class);
+    Route::resource("/services",ServicesController::class);
 
 });
 

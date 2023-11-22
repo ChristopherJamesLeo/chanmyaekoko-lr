@@ -53,7 +53,7 @@
                 <div class="col-12">
                     <div class="p-3 rounded-1 card_content_container">
                         <div class="card_title">
-                            <h3>{{$experience->company}} </h3>
+                            <h3>{{$experience->company}}<small class="ms badge rounded-pill bg-primary" style="font-size:10px">{{$experience->status['name']}}</small> </h3>
                             <span class="d-block">{{$experience->position}}</span>
                             <small class="duration"><i>{{$experience->duration}} months</i></small>
                         </div>
@@ -62,7 +62,6 @@
                                 {{$experience->description}}
                             </p>
                         </div>
-                        <small>{{$experience->status['name']}}</small>
                         <!-- start btn container -->
                         <div class="mt-3 d-flex flex-wrap justify-content-end align-items-center gap-2">
                             <a href="{{route('experiences.edit',$experience->id)}}" class="btn rounded-1">Update <i class="fas fa-tools ms-2"></i></a>

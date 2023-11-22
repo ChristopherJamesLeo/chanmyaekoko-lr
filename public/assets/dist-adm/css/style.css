@@ -624,6 +624,13 @@ body{
     color: var(--global-secondary-text-color);
 
 }
+
+.update_btn_group {
+    display: none;
+}
+.update_btn_group.active{
+    display: flex;
+}
 /* end edit form */
 /* start img preview container */
 .img_preview_container {
@@ -851,14 +858,14 @@ body{
     font-size: 18px;
 }
 
-.logo_view_container,.imges_view_container,.video_view_container {
+.logo_view_container,.imges_view_container,.video_view_container,.edit_view_container {
     display: none;
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px ;
     
 }
-.logo_view_container.active,.imges_view_container.active,.video_view_container.active {
+.logo_view_container.active,.imges_view_container.active,.video_view_container.active,.edit_view_container.active {
     display: flex;
 }
 .view_point {
