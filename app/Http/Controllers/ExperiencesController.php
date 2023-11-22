@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Models\Experience;
+use App\Models\Status;
 
 class ExperiencesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $experiences = Experience::all();
+
+        return view("experiences.index",compact("experiences"));
     }
 
     /**
@@ -19,7 +21,7 @@ class ExperiencesController extends Controller
      */
     public function create()
     {
-        //
+        return view("experiences.create");
     }
 
     /**
@@ -27,7 +29,17 @@ class ExperiencesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $experience = new Experience();
+
+        $experience -> company = $request["company"];
+        $experience -> position = $request["position"];
+        $experience -> duration = $request["duration"];
+        $experience -> description = $request["description"];
+        $experience -> slug = Str::slug($request["company"]);
+
+        $experience -> save();
+
+        return redirect(route("experiences.index"));
     }
 
     /**
@@ -35,7 +47,7 @@ class ExperiencesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        
     }
 
     /**
@@ -43,7 +55,11 @@ class ExperiencesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $experience = Experience::findOrFail($id);
+
+        $statuses = Status::all();
+
+        return view("experiences.edit",compact("experience"))->with("statuses",$statuses);
     }
 
     /**
@@ -51,7 +67,18 @@ class ExperiencesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $experience = Experience::findOrFail($id);
+
+        $experience -> company = $request["company"];
+        $experience -> position = $request["position"];
+        $experience -> duration = $request["duration"];
+        $experience -> description = $request["description"];
+        $experience -> slug = Str::slug($request["company"]);
+        $experience -> status_id = $request["status_id"];
+
+        $experience -> save();
+
+        return redirect(route("experiences.index"));
     }
 
     /**
@@ -59,6 +86,10 @@ class ExperiencesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $experience = Experience::findOrFail($id);
+
+        $experience -> delete();
+
+        return redirect()->back();
     }
 }

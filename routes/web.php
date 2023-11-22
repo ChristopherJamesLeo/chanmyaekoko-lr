@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MainPortfolioController;
 use App\Http\Controllers\DashboardController;
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("/abouts",AboutController::class);
     Route::resource("/educations",EducationController::class);
     Route::resource("/skills",SkillsController::class);
+    Route::resource("/experiences",ExperiencesController::class);
 
 });
 
