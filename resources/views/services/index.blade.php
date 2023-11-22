@@ -141,6 +141,11 @@
                         @csrf 
                         @method("PUT")
                         <div class="row">
+                            <div class="mb-4 col-lg-12">
+                                <div class="img_container">
+                                    <img src="{{ asset('assets/imgs/icons/' . $service->image) }}" width="100px" height="100px" class="me-3" alt="">
+                                </div>
+                            </div>
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                     <input type="text" name="name" id="edit_name" class="form-control form-control-md shadow-none outline-none" placeholder="Add Service Type" required >
@@ -161,9 +166,9 @@
                                 </div>
                             </div>
                             
-                            <div class="edit_view_container active">
-                                <div class="preview_container">
-                                    <img src="" class="preview_img edit_show_img" alt="">
+                            <div class="mb-3 edit_view_container active">
+                                <div class="preview_container" style="width:100px;height:100px">
+                                    <img src="" class="preview_img edit_show_img" width="100%" height="100%" style="object-fit:cover" alt="">
                                 </div>
                             </div>
                             
