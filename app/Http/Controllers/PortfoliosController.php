@@ -20,9 +20,7 @@ class PortfoliosController extends Controller
     public function index()
     {
         $portfolios = Portfolio::all();
-        $types = Type::all();
-        $statuses = Status::all();
-        return view("portfolios.index",compact("portfolios","types","statuses"));
+        return view("portfolios.index",compact("portfolios"));
     }
 
 
@@ -38,10 +36,9 @@ class PortfoliosController extends Controller
             "name" => "required|unique:portfolios,name",
             "kind" => "required",
             "type" => "required",
-            // "logo" => "image|mimes:jpg,jpeg,png|max:2048",
+            // "logo" => "required|image|mimes:jpg,jpeg,png|max:2048",
             // "images" => "image|mimes:jpg,jpeg,png|max:2048",
-            // "video" => "required|mimes:mp4,avi,mov,wmv|max:20480",
-            "description" => "required"
+            "video" => "mimes:mp4,avi,mov,wmv|max:10240"
         ]);
 
         $portfolio = new Portfolio;
@@ -66,20 +63,14 @@ class PortfoliosController extends Controller
 
         $portfolio -> save();
 
-        $portfolio = Portfolio::latest('created_at')->first();
+        $getportfolio = Portfolio::latest('created_at')->first();
 
 
-        $portfolioId = $portfolio->id;
-
-
-
+        $portfolioId = $getportfolio->id;
 
         $types = $request["type"];
 
         foreach($types as $type){
-            // $tag -> type_id = $type;
-            // $tag -> taggable_id = $portfolioId;
-            // $tag -> taggable_type = "App\Models\Portfolio";
 
             Tag::create([
                 "type_id" => $type,
@@ -87,6 +78,42 @@ class PortfoliosController extends Controller
                 "taggable_type" => "App\Models\Portfolio"
             ]);
         }
+
+        if($request->hasfile('images')){
+            $files = $request->file("images");
+
+            foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+
+                $newfilename = uniqid().time()."products".$filename;
+                
+                $file -> move(public_path("assets/imgs/products/"),$newfilename);
+
+                Image::create([
+                    "name" => $newfilename,
+                    "taggable" => $portfolioId,
+                    "imageable" => "App\Models\Portfolio"
+                ]);
+            }
+        }
+
+        if($request->hasfile("video")){
+            $file = $request->file("video");
+            
+            $filename = $file -> getClientOriginalName();
+
+            $newfilename = uniqid().time()."video".$filename;
+
+            $file -> move(public_path("assets/videos/"),$newfilename);
+
+            Video::create([
+                "name" => $newfilename,
+                "taggable" => $portfolioId,
+                "videoable" => "App\Models\Portfolio"
+            ]);
+        }
+
+
         return redirect(route("portfolios.index"));
 
     }
@@ -94,7 +121,13 @@ class PortfoliosController extends Controller
 
     public function show(string $id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+
+        $images = Image::where("taggable",$id)->get();
+
+        $videos = Video::where("taggable",$id) -> get();
+
+        return view("portfolios.show",compact("portfolio","images","videos"));
     }
 
 

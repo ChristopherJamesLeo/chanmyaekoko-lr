@@ -22,12 +22,12 @@ class Portfolio extends Model
         "description"
     ];
 
-    public function types(){
-        return $this -> belongsTo(Type::class);
-    }
 
     public function status(){
         return $this -> belongsTo(Status::class);
     }
 
+    public function types(){
+        return $this -> morphToMany(Type::class,"taggable_type");
+    }
 }

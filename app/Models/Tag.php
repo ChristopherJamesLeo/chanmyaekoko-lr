@@ -18,4 +18,7 @@ class Tag extends Model
         "taggable_id",
         "taggable_type",
     ];
+
+
+ 
 }

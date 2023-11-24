@@ -14,4 +14,9 @@ class Type extends Model
     protected $primaryKey = "id";
 
     protected $guarded = [];
+
+    public function portfolios(){
+        return $this -> morphedByMany(Portfolio::class,"taggable_type");
+    }
+
 }

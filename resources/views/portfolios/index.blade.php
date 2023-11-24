@@ -51,20 +51,26 @@
                     <a href="{{route('portfolios.create')}}" class="btn rounded-1 ">Add Portfolio</a>
                 </div>
                 <div class="row lay_out grid_layout">
-                    <div class="column_setting col-lg-3 col-md-4 col-sm-12 mb-4">
-                        <div class="img_main_container">
-                            <div class="img_container">
-                                <img src="./../../assets/imgs/gallery/bo.jpg" alt="">
-                                <div class="text-center img_title">
-                                    <a href="" class="nav-link fw-semibold"><span>Bo Mobile</span></a>
+                    @foreach($portfolios as $portfolio)
+                        <div class="column_setting col-lg-3 col-md-4 col-sm-12 mb-4">
+                            <div class="img_main_container">
+                                <div class="img_container">
+                                    <a href="{{route('portfolios.show',$portfolio->id)}}">
+                                    <img src="{{asset('assets/imgs/logos/'.$portfolio->image)}}" alt="{{$portfolio->image}}">
+                                    </a>
+                                    
+                                    <div class="text-center img_title">
+                                        <a href="{{route('portfolios.show',$portfolio->id)}}" class="nav-link fw-semibold"><span>{{$portfolio->name}}<small class="ms-2 badge rounded-pill bg-primary" style="font-size:10px">{{$portfolio->status->name}}</small></span></a>
+                                    </div>
+                                </div>
+                                <div class="p-2 d-flex justify-content-between gap-2 img_edit_btn_container ">
+                                    <a href="{{route('portfolios.edit',$portfolio->id)}}" class="nav-link"><i class="fas fa-edit"></i></a>
+                                    <a href="" class="nav-link"><i class="fas fa-trash"></i></a>
                                 </div>
                             </div>
-                            <div class="p-2 d-flex justify-content-between gap-2 img_edit_btn_container ">
-                                <a href="" class="nav-link"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="nav-link"><i class="fas fa-trash"></i></a>
-                            </div>
                         </div>
-                    </div>
+                    @endforeach
+                    
 
                 </div>
                 <!-- end collaborate content -->
