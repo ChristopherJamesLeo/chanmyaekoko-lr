@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Collaborate;
+use App\Models\Status;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
-use App\Models\Service;
-use App\Models\Status;
-
-class ServicesController extends Controller
+class CollaboratesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $services = Service::all();
-        $statuses = Status::all();
-        return view("services.index",compact("services","statuses"));
+        $collaborates = Collaborate::all();
+        return view("collaborates.index",compact("collaborates"));
     }
 
 
@@ -30,40 +28,42 @@ class ServicesController extends Controller
         $this -> validate($request,[
             "image" => "required|mimes:jpg,jpeg,png"
         ]);
-        $service = new Service();
+        $collaborate = new Collaborate();
 
-        $service -> name = $request["name"];
-        $service -> slug = Str::slug($request["name"]);
+        $collaborate -> name = $request["name"];
+        $collaborate -> slug = Str::slug($request["name"]);
 
         if($request->hasfile("image")){
-            
             $file = $request->file("image");
 
             $filename = $file->getClientOriginalName();
 
             $newfilename = uniqid().time().$filename;
 
-            $file -> move(public_path("assets/imgs/icons/"),$newfilename);
+            $file -> move(public_path("assets/imgs/gallery/"),$newfilename);
 
-            $service -> image = $newfilename;
+            $collaborate -> image = $newfilename;
         }
 
-        $service -> save();
+        $collaborate -> save();
 
-        return redirect(route("services.index"));
+        return redirect(route("collaborates.index"));
     }
 
-
+    public function show(string $id)
+    {
+        return "Hello";
+    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $service = service::findOrFail($id);
+        $collaborate = Collaborate::findOrFail($id);
 
         $statuses = Status::all();
 
-        return view("services.edit",compact("service"))->with("statuses",$statuses);
+        return view("collaborates.edit",compact("collaborate"))->with("statuses",$statuses);
     }
 
     /**
@@ -72,16 +72,13 @@ class ServicesController extends Controller
     public function update(Request $request, string $id)
     {
 
-        $service = Service::findOrFail($id);
+        $collaborate = Collaborate::findOrFail($id);
 
-        $service -> name = $request["name"];
-        $service -> status_id = $request["status_id"];
-        $service -> slug = Str::slug($request["name"]);
+        $collaborate -> name = $request["name"];
+        $collaborate -> status_id = $request["status_id"];
+        $collaborate -> slug = Str::slug($request["name"]);
 
-
-        $filepath = "assets/imgs/icons/".$service->image;
-
-        
+        $filepath = "assets/imgs/gallery/".$collaborate->image;
 
         if($request->hasFile("image")){
 
@@ -95,16 +92,16 @@ class ServicesController extends Controller
 
             $newfilename = uniqid().time().$filename;
 
-            $file -> move(public_path("assets/imgs/icons/"),$newfilename);
+            $file -> move(public_path("assets/imgs/gallery/"),$newfilename);
 
-            $service -> image = $newfilename;
+            $collaborate -> image = $newfilename;
 
 
         }
 
-        $service -> save();
+        $collaborate -> save();
 
-        return redirect(route("services.index"));
+        return redirect(route("collaborates.index"));
     }
 
     /**
@@ -112,15 +109,16 @@ class ServicesController extends Controller
      */
     public function destroy(string $id)
     {
-        $service = Service::findOrFail($id);
 
-        $filepath = "assets/imgs/icons/".$service->image;
+        $collaborate = Collaborate::findOrFail($id);
+
+        $filepath = "assets/imgs/gallery/".$collaborate->image;
 
         if(File::exists($filepath)){
             File::delete($filepath);
         }
 
-        $service -> delete();
+        $collaborate -> delete();
 
         return redirect()->back();
     }
