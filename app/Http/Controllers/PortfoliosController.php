@@ -36,8 +36,9 @@ class PortfoliosController extends Controller
             "name" => "required|unique:portfolios,name",
             "kind" => "required",
             "type" => "required",
-            // "logo" => "required|image|mimes:jpg,jpeg,png|max:2048",
-            // "images" => "image|mimes:jpg,jpeg,png|max:2048",
+            "description" => "required",
+            "logo" => "required|image|mimes:jpg,jpeg,png|max:2048",
+            "images.*" => "image|mimes:jpg,jpeg,png|max:2048",
             "video" => "mimes:mp4,avi,mov,wmv|max:10240"
         ]);
 
@@ -133,18 +134,207 @@ class PortfoliosController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+
+        $statuses = Status::all();
+
+        $types = Type::all();
+
+        $images = Image::where("taggable",$id)->get();
+
+        $videos = Video::where("taggable",$id) -> get();
+
+        return view("portfolios.edit",compact("portfolio","images","videos","types","statuses"));
+
     }
 
 
     public function update(Request $request, string $id)
     {
-        //
+        $this -> validate($request,[
+            "name" => "required|unique:portfolios,name,".$id,
+            "kind" => "required",
+            "description" => "required",
+            "logo" => "image|mimes:jpg,jpeg,png|max:2048",
+            "images.*" => "image|mimes:jpg,jpeg,png|max:2048",
+            "video" => "mimes:mp4,avi,mov,wmv|max:10240"
+        ]);
+
+        $portfolio = Portfolio::findOrFail($id);
+        
+        $portfolio -> name = $request["name"];
+        $portfolio -> kind = $request["kind"];
+        $portfolio -> status_id = $request["status_id"];
+        $portfolio -> description = $request["description"];
+        $portfolio -> slug = Str::slug($request["name"]);
+
+        if($request->hasfile("logo")){
+
+            $filepath = "assets/imgs/logos/". $portfolio->image;
+
+            if(File::exists($filepath)){
+                File::delete($filepath);
+            }
+
+            $file = $request->file("logo");
+
+            $filename = $file->getClientOriginalName();
+
+            $newfilename = uniqid().time()."logo".$filename;
+
+            $file -> move(public_path("assets/imgs/logos/"),$newfilename);
+
+            $portfolio -> image = $newfilename;
+        }
+
+        $portfolio -> save();
+
+        $types = $request["type"];
+
+        if($types){
+            $tags = Tag::where("taggable_id",$id)->get();
+
+            foreach($tags as $tag){
+                $tag -> delete();
+            }
+
+            foreach($types as $type){
+                Tag::create([
+                    "type_id" => $type,
+                    "taggable_id" => $id,
+                    "taggable_type" => "App\Models\Portfolio"
+                ]);
+            }
+        }
+        
+
+
+        if($request->hasfile('images')){
+
+            $images = Image::where("taggable",$id)->get();
+
+            foreach($images as $image){
+                $filepath = "assets/imgs/products/".$image->name;
+
+                if(File::exists($filepath)){
+                    File::delete($filepath);
+                }
+
+                $image->delete();
+            }
+
+            $files = $request->file("images");
+
+            foreach($files as $file){
+                $filename = $file->getClientOriginalName();
+
+                $newfilename = uniqid().time()."products".$filename;
+                
+                $file -> move(public_path("assets/imgs/products/"),$newfilename);
+
+                Image::create([
+                    "name" => $newfilename,
+                    "taggable" => $id,
+                    "imageable" => "App\Models\Portfolio"
+                ]);
+            }
+        }
+        
+
+
+
+        if($request->hasfile("video")){
+
+            $file = $request->file("video");
+                
+            $filename = $file -> getClientOriginalName();
+            
+            $newfilename = uniqid().time()."video".$filename;
+
+            $file -> move(public_path("assets/videos/"),$newfilename);
+
+            $video = Video::where("taggable",$id)->get();
+
+
+            if(count($video) === 0){
+                Video::create([
+                    "name" => $newfilename,
+                    "taggable" => $id,
+                    "videoable" => "App\Models\Portfolio"
+                ]);
+
+            }else {
+
+                $filepath = "assets/videos/".$video -> name;
+
+                if(File::exists($filepath)){
+                    File::delete($filepath);
+                }
+
+                $video -> name = $newfilename;
+
+                $video -> taggable = $id;
+
+                $video -> videoable = "App\Models\Portfolio";
+
+                $video -> save();
+            }
+
+        }
+
+        return redirect(route("portfolios.show",$id));
     }
 
 
     public function destroy(string $id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+
+        $filepath = "assets/imgs/logos/". $portfolio->image;
+
+        if(File::exists($filepath)){
+            File::delete($filepath);
+        }
+
+        $portfolio->delete();
+
+        $tags = Tag::where("taggable_id",$id)->get();
+
+        foreach($tags as $tag){
+            $tag -> delete();
+        }
+
+        $images = Image::where("taggable",$id)->get();
+        foreach($images as $image){
+
+            $filepath = "assets/imgs/products/".$image->name;
+
+            if(File::exists($filepath)){
+
+                File::delete($filepath);
+
+            }
+
+            $image->delete();
+
+        }
+
+
+        $videos = Video::where("taggable",$id)->get();
+
+        if(count($videos) > 0){
+            foreach($videos as $video){
+                $filepath = "assets/videos/".$video -> name;
+
+                if(File::exists($filepath)){
+                    File::delete($filepath);
+                }
+        
+                $video -> delete();
+            }
+
+        }
+
+        return redirect(route("portfolios.index"));
     }
 }

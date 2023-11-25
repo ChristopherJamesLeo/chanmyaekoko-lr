@@ -44,9 +44,19 @@
                 </div>
                 <!-- start btn container -->
                 <div class="mt-4 d-flex flex-wrap justify-content-end align-items-center gap-2">
-                    <a href="./../editpages/portfolioedit.html" id="update_btn" class="nav-link btn rounded-1">Update <i class="fas fa-tools ms-2"></i></a>
-                    <a href="#" id="update_btn" class="nav-link btn rounded-1 secondary">Delete <i class="fas fa-trash ms-2"></i></a>
+                    <a href="{{route('portfolios.index')}}" id="" class="nav-link btn rounded-1">Back <i class="fas fa-angle-left ms-2"></i></a>
+
+                    <a href="{{route('portfolios.edit',$portfolio->id)}}" id="update_btn" class="nav-link btn rounded-1">Update <i class="fas fa-tools ms-2"></i></a>
+
+                    <a href="javascript:void(0)"
+                    data-id = "{{$portfolio->id}}"
+                    data-name = "{{$portfolio->name}}"
+                    id="deleteBtn" class="nav-link btn rounded-1 secondary">Delete <i class="fas fa-trash ms-2"></i></a>
                 </div>
+                <form action="{{route('portfolios.destroy',$portfolio->id)}}" id="formdelete{{$portfolio->id}}" method="POST">
+                    @csrf 
+                    @method("DELETE")
+                </form>
                 <!-- end btn container   -->
 
             </div>
@@ -62,6 +72,17 @@
     <!-- magnific pop up css1 js1 -->
     <script src="{{asset('assets/libs/Magnific-Popup-master/dist/jquery.magnific-popup.min.js')}}"></script>
     <script>
+        $(document).ready(function(){
+            // start delete btn
+            $("#deleteBtn").click(function(){
+                let getid = $(this).data("id");
+                let getname = $(this).data("name");
+                if(window.confirm(`Are You Sure To Delete ${getname}` )){
+                    $("#formdelete"+getid).submit();
+                }
+            })
+            // end delete btn
+
             // start portfolio gallery
             $('.portfolio_view').magnificPopup({
                 type: 'image',
@@ -84,6 +105,8 @@
             
             });
             // end portfolio gallery
+        })
+
     </script>
 @endsection
 

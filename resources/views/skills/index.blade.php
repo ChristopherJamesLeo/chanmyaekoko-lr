@@ -102,8 +102,6 @@
 
                 if(confirm(`Are Your Sure!! You want to delete ${gettype}`)){
                     $("#formdelete"+getidx).submit();
-                }else{
-
                 }
             })
         })

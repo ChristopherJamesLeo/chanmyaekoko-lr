@@ -65,9 +65,16 @@
                                 </div>
                                 <div class="p-2 d-flex justify-content-between gap-2 img_edit_btn_container ">
                                     <a href="{{route('portfolios.edit',$portfolio->id)}}" class="nav-link"><i class="fas fa-edit"></i></a>
-                                    <a href="" class="nav-link"><i class="fas fa-trash"></i></a>
+                                    <a href="javascript:void(0)" 
+                                    data-id = "{{$portfolio->id}}" 
+                                    data-name = "{{$portfolio->name}}"
+                                    class="nav-link delete_btns"><i class="fas fa-trash"></i></a>
                                 </div>
                             </div>
+                            <form action="{{route('portfolios.destroy',$portfolio->id)}}" id="deleteform{{$portfolio->id}}" method="POST">
+                                @csrf 
+                                @method("DELETE")
+                            </form>
                         </div>
                     @endforeach
                     
@@ -85,6 +92,17 @@
 @section("customscript")
     <!-- start custom  js -->
     <script>
+
+        $(document).ready(function(){
+            $(".delete_btns").click(function(){
+                let getId = $(this).data("id");
+                let getName = $(this).data("name");
+
+                if(window.confirm(`!! Are You Sure To Delete ${getName}`)){
+                    $("#deleteform"+getId).submit();
+                }
+            })
+        })
 
         // start change layout
         let getLayoutBtns = document.querySelectorAll(".change_layout");
