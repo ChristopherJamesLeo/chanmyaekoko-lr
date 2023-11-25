@@ -12,6 +12,9 @@
                     <div class="row">
                         <h3>{{$portfolio->name}}</h3>
                         <span style="font-size:20px;">{{$portfolio->kind}}</span>
+                        <div>
+                            <span>Product Type - {{$typename}}</span>
+                        </div>
                         <div class="col-lg-3 col-md-4 col-sm-6 my-2">
                             <img src="{{asset('assets/imgs/logos/'.$portfolio->image)}}" width="100%"  alt="">
                         </div>

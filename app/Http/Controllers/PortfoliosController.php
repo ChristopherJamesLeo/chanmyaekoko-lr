@@ -124,11 +124,33 @@ class PortfoliosController extends Controller
     {
         $portfolio = Portfolio::findOrFail($id);
 
+        $tags = Tag::where("taggable_id",$id)->get();
+
+        $typename = "";
+
+        foreach($tags as $tag){
+            $tag -> type_id;
+
+            $types = Type::where("id",$tag->type_id)->get();
+            
+            // echo $types;
+            foreach($types as $type){
+                // echo $type -> name;
+                $typename .= $type -> name." / ";
+            }
+
+            
+            
+        }
+
+
+        
+
         $images = Image::where("taggable",$id)->get();
 
         $videos = Video::where("taggable",$id) -> get();
 
-        return view("portfolios.show",compact("portfolio","images","videos"));
+        return view("portfolios.show",compact("portfolio","images","videos","typename"));
     }
 
 
@@ -140,11 +162,26 @@ class PortfoliosController extends Controller
 
         $types = Type::all();
 
+        $tags = Tag::where("taggable_id",$id)->get();
+
+        $typename = "";
+
+        foreach($tags as $tag){
+            $tag -> type_id;
+
+            $types = Type::where("id",$tag->type_id)->get();
+            
+            foreach($types as $type){
+                $typename .= $type -> name." / ";
+            }
+
+        }
+
         $images = Image::where("taggable",$id)->get();
 
         $videos = Video::where("taggable",$id) -> get();
 
-        return view("portfolios.edit",compact("portfolio","images","videos","types","statuses"));
+        return view("portfolios.edit",compact("portfolio","images","videos","types","statuses","typename"));
 
     }
 

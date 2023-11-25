@@ -11,6 +11,9 @@
                     <div class="mb-3 product_title">
                         <h3 class="product_name">{{$portfolio->name}}</h3>
                         <span class="product_type">{{$portfolio->kind}}<small class="ms-2 badge rounded-pill bg-primary" style="font-size:10px">{{$portfolio->status->name}}</small></span>
+                        <div>
+                            <span>Product Type - {{$typename}}</span>
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <a href="{{asset('assets/imgs/logos/'.$portfolio->image)}}" class="portfolio_view">
