@@ -1,7 +1,7 @@
 @extends("layouts.pagesindex")
 
 @section("content")
-<div class="row">
+    <div class="row">
         
         <div class="col-lg-12 mb-2">
             <div class="content_container">

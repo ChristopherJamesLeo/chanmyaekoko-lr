@@ -7,13 +7,22 @@ use App\Http\Controllers\CollaboratesController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EditionsController;
 use App\Http\Controllers\ExperiencesController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LinksController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PortfoliosController;
+use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\PhonesController;
+use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\MainPortfolioController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ShowDashboardController;
 use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\StatusesController;
+use App\Http\Controllers\TypesController;
+
+
 
 
 /*
@@ -31,9 +40,9 @@ Route::get('/', function () {
     return view('main/index');
 })->name("main.index");
 
-// Route::get('/dashboards', function () {
-//     return view('dashboards/index');
-// })->middleware(['auth', 'verified'])->name('dashboards');
+// Route::get('/dashboard', function () {
+//     return view('/main.index');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // main portfolio
 Route::resource("/mainportfolio",MainPortfolioController::class);
@@ -54,7 +63,13 @@ Route::middleware('auth')->group(function () {
     Route::resource("/editions",EditionsController::class);
     Route::resource("/collaborates",CollaboratesController::class);
     Route::resource("/portfolios",PortfoliosController::class);
-    
+    Route::resource("/profiles",ProfilesController::class);
+    Route::put("/profilesimages/{id}",[ProfileImageController::class,"update"])->name("profileimage.upload");
+    Route::resource("/logins",LoginController::class);
+    Route::resource("/links",LinksController::class);
+    Route::resource("/phones",PhonesController::class);
+    Route::resource("/types",TypesController::class);
+    Route::resource("/statuses",StatusesController::class);
 
 });
 

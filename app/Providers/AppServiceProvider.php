@@ -3,6 +3,11 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Education;
+use App\Models\Skill;
+use App\Models\Service;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +24,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer("*",function($view){
+
+            $userdata = Auth::user();
+            $educations = Education::all();
+            $skills = Skill::all();
+            $services = Service::all();
+
+            $view->with("userdata",$userdata)->with("educations",$educations)->with("skills", $skills)->with("services",$services);
+
+        });
     }
 }

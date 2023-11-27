@@ -10,13 +10,11 @@ function navBtn(){
     document.querySelector(".right_side_container").classList.toggle("active");
 }
 
-
-
 // start show content
 let getTabs = document.querySelectorAll(".aside_list_container ul li a");
 let getFrame = document.querySelector(".iframe_container iframe");
 
-let getPages = ["maindashboards","abouts","educations","skills","experiences","services","editions","collaborates","portfolios","profiles","logins"];
+let getPages = ["maindashboards","abouts","educations","skills","experiences","services","editions","collaborates","portfolios","profiles","links","phones","titles","types","statuses","logins"];
 
 
 getTabs.forEach(function(getTab,idx){

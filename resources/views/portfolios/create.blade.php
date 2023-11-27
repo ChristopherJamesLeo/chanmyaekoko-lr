@@ -82,7 +82,7 @@
                             <div class="d-flex flex-wrap justify-content-end align-items-center gap-3">
                                 <button type="submit" class="btn rounded-1 ">Add <i class="fas fa-cloud-upload-alt"></i></button>
                                 <button type="reset"  class="btn rounded-1 secondary ">Reset <i class="fas fa-sync"></i></button>
-                                <a href="./../pages/portfolio.html" class="btn rounded-1"><i class="fas fa-angle-left me-2"></i> Cancel </a>
+                                <a href="{{route('portfolios.index')}}" class="btn rounded-1"><i class="fas fa-angle-left me-2"></i> Cancel </a>
                             </div>
                         </div>
                     </form>

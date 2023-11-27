@@ -46,7 +46,7 @@
                     </div>
                     <ul class="list-unstyled text-capitalize">
                         <li class="py-2">
-                            <a href="#" class="nav-link active">
+                            <a href="javascript:void(0)" class="nav-link active">
                                 <i class="fas fa-cubes" title="Dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -58,27 +58,27 @@
                     </div>
                     <ul class="list-unstyled text-capitalize">
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-microscope" title="About"></i> <span>About</span>
                             </a>
                         </li>
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-user-graduate" title="Education"></i> <span>Education</span>
                             </a>
                         </li>
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-coins" title="Skill"></i><span>Skill</span>
                             </a>
                         </li>
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-vial" title="Experience"></i> <span>Experience</span>
                             </a>
                         </li>
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-hammer" title="Service"></i><span>Service</span>
                             </a>
                         </li>
@@ -88,12 +88,12 @@
                             </a>
                         </li>
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="far fa-object-group" title="Collaborate"></i><span>Collaborate</span>
                             </a>
                         </li>
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-photo-video" title="Portfolio"></i><span>Portfolio</span>
                             </a>
                         </li>
@@ -105,8 +105,40 @@
                     </div>
                     <ul class="list-unstyled text-capitalize">
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-user" title="Profile"></i><span>Profile</span>
+                            </a>
+                        </li>
+                        <li class="py-2">
+                            <a href="javascript:void(0)" class="nav-link ">
+                                <i class="fas fa-link" title="Links"></i><span>Links</span>
+                            </a>
+                        </li>
+                        <li class="py-2">
+                            <a href="javascript:void(0)" class="nav-link ">
+                                <i class="fas fa-phone" title="Phone"></i><span>Phones</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="list_header">
+                        <h3 class="">
+                            <i class="fas fa-ellipsis-h" title="Management"></i><span>Management</span>
+                        </h3>
+                    </div>
+                    <ul class="list-unstyled text-capitalize">
+                        <li class="py-2">
+                            <a href="javascript:void(0)" class="nav-link ">
+                                <i class="fas fa-tasks" title="Title"></i><span>Titles</span>
+                            </a>
+                        </li>
+                        <li class="py-2">
+                            <a href="javascript:void(0)" class="nav-link ">
+                                <i class="fas fa-wrench" title="Types"></i><span>Types</span>
+                            </a>
+                        </li>
+                        <li class="py-2">
+                            <a href="javascript:void(0)" class="nav-link ">
+                                <i class="fas fa-info-circle" title="Status"></i><span>Status</span>
                             </a>
                         </li>
                     </ul>
@@ -117,7 +149,7 @@
                     </div>
                     <ul class="list-unstyled text-capitalize">
                         <li class="py-2">
-                            <a href="#" class="nav-link ">
+                            <a href="javascript:void(0)" class="nav-link ">
                                 <i class="fas fa-key" title="Login"></i><span>Login</span>
                             </a>
                         </li>
