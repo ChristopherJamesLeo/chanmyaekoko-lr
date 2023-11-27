@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\About;
+use App\Models\Title;
 
 class AboutController extends Controller
 {
@@ -13,7 +14,8 @@ class AboutController extends Controller
     public function index()
     {
         $abouts = About::findOrFail(1);
-        return view("abouts.index",compact("abouts"));
+        $titles = Title::where("id",1)->get();
+        return view("abouts.index",compact("abouts","titles"));
     }
 
     public function update(Request $request, string $id)

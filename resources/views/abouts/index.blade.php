@@ -4,15 +4,18 @@
 <div class="row">
         <div class="col-lg-6 col-md-12 mb-2">
             <div class="content_img_container">
-                <div class="rounded-2 content_img " style="background-image: url(./../../assets/imgs/profiles/photo_1_2023-11-02_10-37-40.jpg);"></div>
+                @foreach($titles as $title)
+                <div class="rounded-2 content_img " style="background-image: url({{asset('assets/imgs/banners/'.$title->image)}});"></div>
+                @endforeach
             </div>
         </div>
         <div class="col-lg-6 col-md-12 mb-2">
             <div class="content_container">
+                @foreach($titles as $title)
                 <!-- global content title -->
                 <div class="mb-3 content_title">
-                    <h3 class="text-start text-uppercase">About</h3>
-                    <span class="text-uppercase h5 sub_title">Whose given. Were gathered. There first subdue greater.</span>
+                    <h3 class="text-start text-uppercase">{{$title -> name}}</h3>
+                    <span class="text-uppercase h5 sub_title">{{$title->subname}}</span>
                 </div>
                 <!-- end global contetn title -->
                 <!-- start btn container -->
@@ -23,21 +26,23 @@
                 <!-- end btn container   -->
                 <!-- start update form -->
                 <div class="p-2 pt-4 update_form_container">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('titles.update',$title->id)}}" method="POST" enctype="multipart/form-data">
+                        @csrf 
+                        @method("PUT")
                         <div class="row">
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="text" name="" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Title" required value="About">
+                                    <input type="text" name="name" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Title" required value="{{$title -> name}}">
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="text" name="" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required value="Whose given. Were gathered. There first subdue greater." >
+                                    <input type="text" name="subname" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required value="{{$title -> subname}}" >
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="file" name="" id="img_box" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required >
+                                    <input type="file" name="image" id="img_box" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" >
                                 </div>
                             </div>
                             <div class="img_preview_container">
@@ -53,6 +58,7 @@
                         </div>
                     </form>
                 </div>
+                @endforeach
                 <!-- end update form -->
                 <!-- global content para -->
                     <div class="mt-3 content_para">
@@ -66,23 +72,25 @@
                 <ul class="list-unstyled">
                     <li>
                         <span>Name :</span> 
-                        <span class="fw-semibold">{{Auth::user()->name}}</span>
+                        <span class="fw-semibold">{{$userdata->name}}</span>
                     </li>
                     <li>
                         <span>Email :</span> 
                         <span class="fw-semibold">
-                        {{Auth::user()->email}}
+                        {{$userdata->email}}
                         </span>
                     </li>
                     <li>
                         <span>Phone :</span> 
                         <span class="fw-semibold">
-                            09400110179, 09250200612
+                            @foreach($phones as $phone)
+                                {{$phone -> name}}
+                            @endforeach
                         </span>
                     </li>
                     <li>
                         <span>Address :</span> 
-                        <span class="fw-semibold">Between 48 & 49 ,Mya Ye Nandar Housing, Chan Mya Tharzi Tsp, Mandalay</span>
+                        <span class="fw-semibold">{{$userdata->address}}</span>
                     </li>
                 </ul>
                 <!-- end info detail list    -->

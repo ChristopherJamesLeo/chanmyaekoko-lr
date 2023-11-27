@@ -7,8 +7,10 @@
             <div class="content_container">
                 <!-- global content title -->
                 <div class="mb-3 content_title">
-                    <h3 class="text-start text-uppercase">Education</h3>
-                    <span class="text-uppercase h5 sub_title">Whose given. Were gathered. There first subdue greater.</span>
+                    @foreach($titles as $title)
+                    <h3 class="text-start text-uppercase">{{$title -> name}}</h3>
+                    <span class="text-uppercase h5 sub_title">{{$title -> subname}}</span>
+                    @endforeach
                 </div>
                 <!-- end global contetn title -->
                 
@@ -31,27 +33,30 @@
                 </div>
                 <!-- end btn container   -->
                 <!-- start update form -->
+                @foreach($titles as $title)
                 <div class="p-2 pt-4 update_form_container">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{route('titles.update',$title->id)}}" method="post" enctype="multipart/form-data">
+                        @csrf 
+                        @method("PUT")
                         <div class="row">
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="text" name="" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Title" required >
+                                    <input type="text" name="name" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Title" required value="{{$title->name}}" >
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="text" name="" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required >
+                                    <input type="text" name="subname" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required  value="{{$title->subname}}">
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="file" name="" id="img_box" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required >
+                                    <input type="file" name="image" id="img_box" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" >
                                 </div>
                             </div>
                             <div class="img_preview_container">
                                 <div class="preview_container">
-                                    <img src="./../../assets/imgs/profiles/photo_1_2023-11-02_10-37-40.jpg" class="preview_img" alt="">
+                                    <img src="" class="preview_img" alt="">
                                 </div>
                             </div>
                             <div class="d-flex flex-wrap justify-content-end align-items-center gap-3">
@@ -62,16 +67,15 @@
                         </div>
                     </form>
                 </div>
+                @endforeach
                 <!-- end update form -->
-
-                
-
-
             </div>
         </div>
         <div class="col-lg-6 col-md-12 mb-2">
             <div class="content_img_container">
-                <div class="rounded-2 content_img " style="background-image: url(./../../assets/imgs/profiles/photo_1_2023-11-02_10-37-40.jpg);"></div>
+                @foreach($titles as $title)
+                <div class="rounded-2 content_img " style="background-image: url({{asset('assets/imgs/banners/'.$title->image)}});"></div>
+                @endforeach
             </div>
         </div>
     </div>

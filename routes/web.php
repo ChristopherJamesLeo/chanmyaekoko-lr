@@ -21,6 +21,7 @@ use App\Http\Controllers\SkillsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\StatusesController;
 use App\Http\Controllers\TypesController;
+use App\Http\Controllers\TitlesController;
 
 
 
@@ -69,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::resource("/links",LinksController::class);
     Route::resource("/phones",PhonesController::class);
     Route::resource("/types",TypesController::class);
+    Route::resource("/titles",TitlesController::class);
     Route::resource("/statuses",StatusesController::class);
 
 });

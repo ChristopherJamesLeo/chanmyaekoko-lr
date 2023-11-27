@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 
 use App\Models\Service;
 use App\Models\Status;
+use App\Models\Title;
 
 class ServicesController extends Controller
 {
@@ -18,7 +19,8 @@ class ServicesController extends Controller
     {
         $services = Service::all();
         $statuses = Status::all();
-        return view("services.index",compact("services","statuses"));
+        $titles = Title::where("id",5)->get();
+        return view("services.index",compact("services","statuses","titles"));
     }
 
 

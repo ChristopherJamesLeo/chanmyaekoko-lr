@@ -11,6 +11,7 @@ use App\Models\Video;
 use App\Models\Portfolio;
 use App\Models\Tag;
 use App\Models\Type;
+use App\Models\Title;
 use App\Models\Status;
 
 
@@ -20,7 +21,8 @@ class PortfoliosController extends Controller
     public function index()
     {
         $portfolios = Portfolio::all();
-        return view("portfolios.index",compact("portfolios"));
+        $titles = Title::where("id",7)->get();
+        return view("portfolios.index",compact("portfolios","titles"));
     }
 
 

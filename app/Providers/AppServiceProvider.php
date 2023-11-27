@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Education;
 use App\Models\Skill;
 use App\Models\Service;
+use App\Models\Phone;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +31,9 @@ class AppServiceProvider extends ServiceProvider
             $educations = Education::all();
             $skills = Skill::all();
             $services = Service::all();
+            $phones = Phone::all();
 
-            $view->with("userdata",$userdata)->with("educations",$educations)->with("skills", $skills)->with("services",$services);
+            $view->with("userdata",$userdata)->with("educations",$educations)->with("skills", $skills)->with("services",$services)->with("phones",$phones);
 
         });
     }

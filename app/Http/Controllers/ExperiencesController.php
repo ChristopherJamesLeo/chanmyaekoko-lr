@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Experience;
 use App\Models\Status;
-
+use App\Models\Title;
 class ExperiencesController extends Controller
 {
     public function index()
     {
         $experiences = Experience::all();
-
-        return view("experiences.index",compact("experiences"));
+        $titles = Title::where("id",4)->get();
+        return view("experiences.index",compact("experiences","titles"));
     }
 
     /**

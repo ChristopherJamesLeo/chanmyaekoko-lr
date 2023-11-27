@@ -5,10 +5,11 @@
         
         <div class="col-lg-12 mb-2">
             <div class="content_container">
+                @foreach($titles as $title)
                 <!-- global content title -->
                 <div class="mb-3 content_title">
-                    <h3 class="text-start text-uppercase">Skill</h3>
-                    <span class="text-uppercase h5 sub_title">Whose given. Were gathered. There first subdue greater.</span>
+                    <h3 class="text-start text-uppercase">{{$title -> name}}</h3>
+                    <span class="text-uppercase h5 sub_title">{{$title->subname}}</span>
                 </div>
                 <!-- end global contetn title -->
                 <!-- start btn container -->
@@ -19,16 +20,18 @@
                 <!-- end btn container   -->
                 <!-- start update form -->
                 <div class="p-2 pt-4 update_form_container">
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{route('titles.update',$title->id)}}" method="post" enctype="multipart/form-data">
+                        @csrf 
+                        @method("PUT")
                         <div class="row">
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="text" name="" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Title" required >
+                                    <input type="text" name="name" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Title" required value="{{$title -> name}}">
                                 </div>
                             </div>
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
-                                    <input type="text" name="" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required >
+                                    <input type="text" name="subname" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Sub Title" required value="{{$title -> subname}}">
                                 </div>
                             </div>
                             
@@ -41,6 +44,7 @@
                     </form>
                 </div>
                 <!-- end update form -->
+                @endforeach
 
             </div>
         </div>

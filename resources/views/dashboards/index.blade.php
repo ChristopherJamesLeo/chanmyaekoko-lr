@@ -191,11 +191,11 @@
                             <span>Language</span>
                         </div> -->
                         <div class="email_container">
-                            <a href="mailto:{{Auth::user()->email}}" class="nav-link"><i class="fas fa-envelope"></i></a>
+                            <a href="mailto:{{$userdata->email}}" class="nav-link"><i class="fas fa-envelope"></i></a>
                         </div>
                         <div class="user_profile">
-                            <a href="#" class="nav-link">
-                                <img src="./../assets/imgs/profiles/photo_5_2023-11-02_10-37-40.jpg" width="42px" height="42px" style="object-fit: cover;" class="rounded-circle" alt="">
+                            <a href="javascript:void(0)" class="nav-link">
+                                <img src="{{asset('assets/imgs/profiles/'.$userdata->image)}}" width="42px" height="42px" style="object-fit: cover;" class="rounded-circle" alt="{{$userdata->firstname}}">
                             </a>
                         </div>
                     </div>

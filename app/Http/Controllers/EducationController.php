@@ -7,7 +7,7 @@ use App\Models\Education;
 use App\Models\Status;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
+use App\Models\Title;
 
 
 class EducationController extends Controller
@@ -18,7 +18,8 @@ class EducationController extends Controller
     public function index()
     {
         $educations = Education::all();
-        return view("educations.index",compact("educations"));
+        $titles = Title::where("id",2)->get();
+        return view("educations.index",compact("educations","titles"));
     }
 
     /**
@@ -48,17 +49,6 @@ class EducationController extends Controller
         return redirect(route("educations.index"));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $education = Education::findOrFail($id);
@@ -68,9 +58,6 @@ class EducationController extends Controller
         return view("educations.edit",compact("education"))->with("statuses",$statuses);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $education = Education::findOrFail($id);

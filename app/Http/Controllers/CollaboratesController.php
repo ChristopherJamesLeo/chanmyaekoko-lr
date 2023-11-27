@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Collaborate;
 use App\Models\Status;
+use App\Models\Title;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +17,8 @@ class CollaboratesController extends Controller
     public function index()
     {
         $collaborates = Collaborate::all();
-        return view("collaborates.index",compact("collaborates"));
+        $titles = Title::where("id",6)->get();
+        return view("collaborates.index",compact("collaborates","titles"));
     }
 
 

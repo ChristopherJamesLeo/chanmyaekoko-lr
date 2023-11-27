@@ -7,16 +7,17 @@ use Illuminate\Support\Str;
 
 use App\Models\Skill;
 use App\Models\Status;
+use App\Models\Title;
 
 class SkillsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $skills = Skill::all();
-        return view("skills.index",compact("skills"));
+        $titles = Title::where("id",3)->get();
+        
+        return view("skills.index",compact("skills","titles"));
     }
 
     /**
