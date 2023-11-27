@@ -43,56 +43,12 @@
                         <div class="p-3 border  profile_contact_link">
                             <h3>Links</h3>
                             <ul class="list-unstyled profile_links">
-                                <li class="py-1 d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="d-flex justify-content-start align-items-center gap-1 links_title">
-                                        <i class="fas fa-globe me-2"></i>
-                                        <div class="p-2 d-flex justify-content-between gap-2">
-                                            <a href="./../editpages/contentlinkedit.html" class="nav-link"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="nav-link"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="nav-link">www.chanmyaekoko.com</a>
+                                @foreach($activeLinks as $link)
+                                <li class="py-1 text-end">
+                                    <a href="javascript:void(0)" class="nav-link">{{$link->link}}</a>
                                 </li>
-                                <li class="py-1 d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="d-flex justify-content-start align-items-center gap-1 links_title">
-                                        <i class="fab fa-facebook-f me-2"></i>
-                                        <div class="p-2 d-flex justify-content-between gap-2">
-                                            <a href="./../editpages/contentlinkedit.html" class="nav-link"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="nav-link"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="nav-link">chanmyaekoko</a>
-                                </li>
-                                <li class="py-1 d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="d-flex justify-content-start align-items-center gap-1 links_title">
-                                        <i class="fab fa-viber me-2"></i>
-                                        <div class="p-2 d-flex justify-content-between gap-2">
-                                            <a href="./../editpages/contentlinkedit.html" class="nav-link"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="nav-link"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="nav-link">chanmyaekoko</a>
-                                </li>
-                                <li class="py-1 d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="d-flex justify-content-start align-items-center gap-1 links_title">
-                                        <i class="fab fa-telegram-plane me-2"></i>
-                                        <div class="p-2 d-flex justify-content-between gap-2">
-                                            <a href="./../editpages/contentlinkedit.html" class="nav-link"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="nav-link"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="nav-link text-end">chanmyaekoko</a>
-                                </li>
-                                <li class="py-1 d-flex justify-content-between align-items-center flex-wrap">
-                                    <div class="d-flex justify-content-start align-items-center gap-1 links_title">
-                                        <i class="fas fa-envelope me-2"></i>
-                                        <div class="p-2 d-flex justify-content-between gap-2">
-                                            <a href="./../editpages/contentlinkedit.html" class="nav-link"><i class="fas fa-edit"></i></a>
-                                            <a href="#" class="nav-link"><i class="fas fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="nav-link">chanmyaekoko@gmail.com</a>
-                                </li>
+                                @endforeach
+
                             </ul>
 
 
@@ -122,26 +78,18 @@
                                         </div>
                                     </div>
                                 </li>
+                                @foreach($activePhones as $phone)
                                 <li class="py-1">
                                     <div class="row align-items-center">
                                         <div class="col-3">
                                             <span class="fw-medium">Phone</span>
                                         </div>
                                         <div class="col-9">
-                                            <span>09400110179</span>
+                                            <span>{{$phone -> name}} </span>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="py-1">
-                                    <div class="row align-items-center">
-                                        <div class="col-3">
-                                            <span class="fw-medium">Phone</span>
-                                        </div>
-                                        <div class="col-9">
-                                            <span>09250200612 </span>
-                                        </div>
-                                    </div>
-                                </li>
+                                @endforeach 
                                 <li class="py-1">
                                     <div class="row align-items-center">
                                         <div class="col-3">
@@ -165,7 +113,7 @@
                             <h3>Education</h3>
                             <!-- start eductaion content -->
                             <ul class="list-unstyled eductaion_list_group">
-                                @foreach($educations as $education)
+                                @foreach($activeEducations as $education)
                                 <li class="mb-2 education_list_items text-start">
                                     <h3 class="m-0 text-capitalize">{{$education->institude}}</h3>
                                     <span class="text-capitalize">{{$education->degree}}</span>
@@ -182,7 +130,7 @@
                                 <div class="mb-4 py-4 px-3 border rounded-1 professional_jobs">
                                     <h3>Services</h3>
                                     <ul class="list-unstyled professional_jobs_infos">
-                                        @foreach($services as $service)
+                                        @foreach($activeServices as $service)
                                         <li class="py-1">
                                             <span>{{ $service -> name }}</span>
                                         </li>
@@ -198,7 +146,7 @@
                                     <h3>Skills</h3>
                                     <ul class="list-unstyled professional_jobs_infos">
 
-                                        @foreach($skills as $skill)
+                                        @foreach($activeSkills as $skill)
                                         <li class="py-1">
                                             <span>{{$skill -> type}}</span>
                                         </li>
