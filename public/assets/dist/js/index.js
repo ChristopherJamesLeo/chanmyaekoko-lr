@@ -77,42 +77,42 @@ $(document).ready(function(){
 // end jquery are
 
 // video play
-let getVideo = document.querySelector(".intro_video");
+// let getVideo = document.querySelector(".intro_video");
 
 
-let videoTimer = document.querySelector(".video_timer span");
+// let videoTimer = document.querySelector(".video_timer span");
 
-let videoInt;
-let int = 33;
-getVideo.addEventListener("play",function(){
-    // console.log("video is playing");
-    clearInterval(videoInt);
-    videoInt = setInterval(function(){
-    int -= 1;
-    // console.log(int);
-    videoTimer.innerHTML = "";
-    videoTimer.textContent = int;
-        if(int == 0){
-            clearInterval(videoInt);
-            getVideo.pause();
-            if(getVideo.paused){
-                document.querySelector(".video_over_layer").classList.add("active");
-            }
-        }
-    },1000);
-})
-getVideo.addEventListener("pause",function(){
-    // console.log("video is pause");
-    clearInterval(videoInt);
-})
+// let videoInt;
+// let int = 33;
+// getVideo.addEventListener("play",function(){
+//     // console.log("video is playing");
+//     clearInterval(videoInt);
+//     videoInt = setInterval(function(){
+//     int -= 1;
+//     // console.log(int);
+//     videoTimer.innerHTML = "";
+//     videoTimer.textContent = int;
+//         if(int == 0){
+//             clearInterval(videoInt);
+//             getVideo.pause();
+//             if(getVideo.paused){
+//                 document.querySelector(".video_over_layer").classList.add("active");
+//             }
+//         }
+//     },1000);
+// })
+// getVideo.addEventListener("pause",function(){
+//     // console.log("video is pause");
+//     clearInterval(videoInt);
+// })
 
-document.querySelector("#video_skip").addEventListener("click",function(){
-    // console.log("skip");
-    clearInterval(videoInt);
-    getVideo.pause();
-    document.querySelector(".video_over_layer").classList.add("active");
+// document.querySelector("#video_skip").addEventListener("click",function(){
+//     // console.log("skip");
+//     clearInterval(videoInt);
+//     getVideo.pause();
+//     document.querySelector(".video_over_layer").classList.add("active");
 
-})
+// })
 
 // end video play
 

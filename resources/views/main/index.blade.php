@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chan Myae Ko Ko</title>
+    <title>{{$userdata->name}}</title>
 
     <!-- magnific pop up css1 js1 -->
     <link rel="stylesheet" href="{{asset('./assets/libs/Magnific-Popup-master/dist/magnific-popup.css')}}">
@@ -29,29 +29,30 @@
 
 <body>
     <!-- start video over layer -->
-    <div class="video_over_layer">
+    <!-- <div class="video_over_layer">
         <div class="video_timer">
             <span>33</span>
         </div>
         <button id="video_skip" class="border-0 ">Skip</button>
         <div class="intro_video_container">
-            <video controls class="intro_video" width="100%" >
-                <source src="./assets/videos/cover_video.mp4">
-            </video>
-            
+            @foreach($activeEditions as $activeEdition)
+            <video src="{{asset('assets/videos/'.$activeEdition->name)}}" controls class="intro_video" width="100%" ></video>
+            @endforeach
         </div>
         
-    </div>
+    </div> -->
     <!-- end video over layer -->
 
     <!-- start header section -->
     <header class=" header_section">
-        <video src="./assets/videos/cover_video.mp4" autoplay loop muted></video>
+        @foreach($activeEditions as $activeEdition)
+        <video src="{{asset('assets/videos/'.$activeEdition->name)}}" autoplay loop muted></video>
+        @endforeach
         <!-- start nav bar -->
         <nav class="navbar py-3 navbar-expand-lg">
             <div class="container">
                 <a href="{{route('main.index')}}" class="navbar-brand">
-                    <span class="fw-bold h3">Chan Myae Ko Ko</span>
+                    <span class="fw-bold h3">{{$userdata->name}}</span>
                 </a>
                 <button onclick="nav()" class="p-0 navbar-toggler active border-0 outline-none shadow-none" data-bs-target="#mynav" data-bs-toggle="collapse">
                     <input type="checkbox" id="checkbox">
@@ -93,10 +94,10 @@
                                     <h2 class="fw-semibold text-uppercase">Hello</h2>
                                 </div>
                                 <div class="banner_content_title">
-                                    <h1 class="wow animate__fadeInUp fw-bold text-uppercase">I am Chan </h1>
+                                    <h1 class="wow animate__fadeInUp fw-bold text-uppercase">I am {{$userdata->firstname}} </h1>
                                 </div>
                                 <div class=" text-uppercase banner_content_info">
-                                    <p class="fw-semibold">Graphic Designer</p>
+                                    <p class="fw-semibold"> {{$userdata->job}}</p>
                                 </div>
                                 <div class="pt-3">
                                     <div class="d-flex gap-4">
@@ -160,17 +161,17 @@
                         <!-- start global title -->
                         <div class="wow animate__fadeInUp  global_title">
                             <h3 class="text-start text-uppercase">Let's <br> Introdute About Myself</h3>
-                            <p class="text-muted ">
-                                Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven midst their. Beast creepeth. Fish days.
-                            </p>
+                            
                         </div>
                         <!-- end global title -->
                         <div class="wow animate__zoomIn">
                             <!-- start global para -->
                             <div class="global_para">
+                                @foreach($activeAbouts as $activeAbout)
                                 <p class="text-start">
-                                    Is give may shall likeness made yielding spirit a itself together created after sea is in beast beginning signs open god you're gathering whose gathered cattle let. Creature whales fruit unto meat the life beginning all in under give two.
+                                    {{$activeAbout->about}}
                                 </p>
+                            @endforeach
                             </div>
                             <!-- end global para -->
 
@@ -178,23 +179,27 @@
                             <ul class="list-unstyled">
                                 <li>
                                     <span>Name :</span> 
-                                    <span class="fw-semibold">Chan Myae Ko Ko</span>
+                                    <span class="fw-semibold">{{$userdata -> name}}</span>
                                 </li>
                                 <li>
                                     <span>Email :</span> 
                                     <span class="fw-semibold">
-                                        <a href="mailto:chamyaekoko200738@gmail.com" class="nav-link d-inline-block">chamyaekoko200738@gmail.com</a>
+                                        <a href="mailto:{{$userdata->email}}" class="nav-link d-inline-block">{{$userdata->email}}</a>
                                     </span>
                                 </li>
                                 <li>
                                     <span>Phone :</span> 
                                     <span class="fw-semibold">
-                                        <a href="tel:09400110179" class="nav-link d-inline-block">09400110179, 09250200612</a>
+                                        @foreach($activePhones as $phone)
+                                            @foreach($activePhone as $activePh)
+                                            <a href="tel:{{$activePh->name}}" class="nav-link d-inline-block">{{$phone -> name}}</a>
+                                            @endforeach
+                                        @endforeach
                                     </span>
                                 </li>
                                 <li>
                                     <span>Address :</span> 
-                                    <span class="fw-semibold">Between 48 & 49 ,Mya Ye Nandar Housing, Chan Mya Tharzi Tsp, Mandalay</span>
+                                    <span class="fw-semibold">{{$userdata -> address}}</span>
                                 </li>
                             </ul>
                             <!-- end info detail list    -->
@@ -232,26 +237,12 @@
                         <!-- end global title -->
                         <!-- start eductaion content -->
                         <ul class="wow animate__fadeInLeft list-unstyled eductaion_list_group">
+                            @foreach($activeEducations as $activeEducation)
                             <li class="education_list_items text-start text-lg-end">
-                                <h3 class="text-capitalize">Associateship Government Technical Institute (AGTI)</h3>
-                                <span class="text-capitalize">IT Major (present)</span>
+                                <h3 class="text-capitalize">{{$activeEducation->institude}}</h3>
+                                <span class="text-capitalize">{{$activeEducation -> degree}}</span>
                             </li>
-                            <li class="education_list_items text-start text-lg-end">
-                                <h3 class="text-capitalize">UK</h3>
-                                <span class="text-capitalize">Diploma In Graphic Design</span>
-                            </li>
-                            <li class="education_list_items text-start text-lg-end">
-                                <h3 class="text-capitalize">ATBC Local University</h3>
-                                <span class="text-capitalize">Diploma  in Graphic Design </span>
-                            </li>
-                            <li class="education_list_items text-start text-lg-end">
-                                <h3 class="text-capitalize">Alpha X Training Center</h3>
-                                <span class="text-capitalize">Photoshop and Video Editing </span>
-                            </li>
-                            <li class="education_list_items text-start text-lg-end">
-                                <h3 class="text-capitalize">Yixel Online Class</h3>
-                                <span class="text-capitalize">Expert Certified in Photoshop & Illustrator  </span>
-                            </li>
+                            @endforeach
                         </ul>
                         <!-- end education content -->
                     </div>
@@ -277,96 +268,29 @@
                             <!-- end global title -->
                             
                             <div class="row justify-content-center">
+                                <?php
+                                    $time = 0;
+                                ?>
+                                @foreach($activeSkills as $activeSkill)
                                 <div class="mb-5 col-lg-3 col-md-6 col-sm-12">
-                                    <div class="wow animate__fadeInUp show_skill_container" data-wow-delay="0s">
+                                    <div class="wow animate__fadeInUp show_skill_container" data-wow-delay="<?php echo $time  ?>s">
                                         <div class="d-flex flex-column justify-content-center align-items-center skill_grap_container">
                                             <div class="mb-4 skill_grap">
                                                 <div data-tilt class="grap_container hover_ef">
                                                     <div class="grap_bg"></div>
                                                     <div class="grap_line" style="background: conic-gradient(#f88d00 0% 90%,transparent 0% 100%);"></div>
-                                                    <div class="show_percentage"><span>90%</span></div>
+                                                    <div class="show_percentage"><span>{{$activeSkill -> level }}%</span></div>
                                                 </div>
                                             </div>
-                                            <div class="text-center skill_title"><h3>Adobe</h3></div>
-                                            <div class="text-center skill_content"><span>Photo Shop</span></div>
+                                            <div class="text-center skill_title"><h3>{{$activeSkill -> subject }}</h3></div>
+                                            <div class="text-center skill_content"><span>{{$activeSkill -> type }}</span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-5 col-lg-3 col-md-6 col-sm-12">
-                                    <div class="wow animate__fadeInUp show_skill_container" data-wow-delay="0.2s">
-                                        <div class="d-flex flex-column justify-content-center align-items-center skill_grap_container">
-                                            <div class="mb-4 skill_grap">
-                                                <div data-tilt class="grap_container hover_ef">
-                                                    <div class="grap_bg"></div>
-                                                    <div class="grap_line" style="background: conic-gradient(#f88d00 0% 90%,transparent 0% 100%);"></div>
-                                                    <div class="show_percentage"><span>90%</span></div>
-                                                </div>
-                                            </div>
-                                            <div class="text-center skill_title"><h3>Adobe</h3></div>
-                                            <div class="text-center skill_content"><span>Illustrator</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-5 col-lg-3 col-md-6 col-sm-12">
-                                    <div class="wow animate__fadeInUp show_skill_container" data-wow-delay="0.4s">
-                                        <div class="d-flex flex-column justify-content-center align-items-center skill_grap_container">
-                                            <div class="mb-4 skill_grap">
-                                                <div data-tilt class="grap_container hover_ef">
-                                                    <div class="grap_bg"></div>
-                                                    <div class="grap_line" style="background: conic-gradient(#f88d00 0% 90%,transparent 0% 100%);"></div>
-                                                    <div class="show_percentage"><span>90%</span></div>
-                                                </div>
-                                            </div>
-                                            <div class="text-center skill_title"><h3>Adobe</h3></div>
-                                            <div class="text-center skill_content"><span>Premiere Pro</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-5 col-lg-3 col-md-6 col-sm-12">
-                                    <div class="wow animate__fadeInUp show_skill_container" data-wow-delay="0.6s">
-                                        <div class="d-flex flex-column justify-content-center align-items-center skill_grap_container">
-                                            <div class="mb-4 skill_grap">
-                                                <div data-tilt class="grap_container hover_ef">
-                                                    <div class="grap_bg"></div>
-                                                    <div class="grap_line" style="background: conic-gradient(#f88d00 0% 90%,transparent 0% 100%);"></div>
-                                                    <div class="show_percentage"><span>90%</span></div>
-                                                </div>
-                                            </div>
-                                            <div class="text-center skill_title"><h3>Adobe</h3></div>
-                                            <div class="text-center skill_content"><span>After Effects</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-5 col-lg-3 col-md-6 col-sm-12">
-                                    <div class="wow animate__fadeInUp show_skill_container" data-wow-delay="0.8s">
-                                        <div class="d-flex flex-column justify-content-center align-items-center skill_grap_container">
-                                            <div class="mb-4 skill_grap">
-                                                <div data-tilt class="grap_container hover_ef">
-                                                    <div class="grap_bg"></div>
-                                                    <div class="grap_line" style="background: conic-gradient(#f88d00 0% 90%,transparent 0% 100%);"></div>
-                                                    <div class="show_percentage"><span>90%</span></div>
-                                                </div>
-                                            </div>
-                                            <div class="text-center skill_title"><h3>Microsoft Office</h3></div>
-                                            <div class="text-center skill_content"><span>Word, Excel, Power Point</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-5 col-lg-3 col-md-6 col-sm-12">
-                                    <div class="wow animate__fadeInUp show_skill_container" data-wow-delay="1s">
-                                        <div class="d-flex flex-column justify-content-center align-items-center skill_grap_container">
-                                            <div class="mb-4 skill_grap">
-                                                <div data-tilt class="grap_container hover_ef">
-                                                    <div class="grap_bg"></div>
-                                                    <div class="grap_line" style="background: conic-gradient(#f88d00 0% 90%,transparent 0% 100%);"></div>
-                                                    <div class="show_percentage"><span>90%</span></div>
-                                                </div>
-                                            </div>
-                                            <div class="text-center skill_title"><h3>Mobile Apps </h3></div>
-                                            <div class="text-center skill_content"><span>KineMaster, Cap Cut, Alight Motion, Canva, Procreate</span></div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <?php $time += 0.2 ?>
+                                @endforeach
+                                
                             </div>
                         </div>
                         
@@ -468,54 +392,26 @@
                 </div>
                 <!-- end global title -->
                 <div class="py-5 row">
+                    <?php $time = 0 ;?>
+                    @foreach($activeServices as $activeService)
                     <div class="mb-4 col-lg-3 col-md-6 col-sm-12">
-                        <div class="wow animate__fadeInUp py-5 service_content_container service_tilt" data-wow-delay="0s">
+                        <div class="wow animate__fadeInUp py-5 service_content_container service_tilt" data-wow-delay="<?php echo $time;?>s">
                             <div class="mb-4 d-flex justify-content-center service_icon_container">
                                 <div class="service_icon" style="width: 60px;">
-                                    <img src="./assets/imgs/icons/web-design.png" width="100%" alt="web-design">
+                                    <img src="{{asset('assets/imgs/icons/'.$activeService->image)}}" width="100%" alt="web-design">
                                 </div>
                             </div>
                             <div class="service_content">
-                                <h3 class="text-center text-capitalize">Graphic Design</h3>
+                                <h3 class="text-center text-capitalize">{{$activeService -> name }}</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-4 col-lg-3 col-md-6 col-sm-12">
-                        <div class="wow animate__fadeInUp py-5 service_content_container service_tilt" data-wow-delay="0.2s">
-                            <div class="mb-4 d-flex justify-content-center service_icon_container">
-                                <div class="service_icon" style="width: 60px;">
-                                    <img src="./assets/imgs/icons/motion-graphic.png" width="100%" alt="motion-graphic">
-                                </div>
-                            </div>
-                            <div class="service_content">
-                                <h3 class="text-center text-capitalize">Motion Graphic</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4 col-lg-3 col-md-6 col-sm-12">
-                        <div class="wow animate__fadeInUp py-5 service_content_container service_tilt" data-wow-delay="0.4s">
-                            <div class="mb-4 d-flex justify-content-center service_icon_container">
-                                <div class="service_icon" style="width: 60px;">
-                                    <img src="./assets/imgs/icons/video-editing.png" width="100%" alt="web-design">
-                                </div>
-                            </div>
-                            <div class="service_content">
-                                <h3 class="text-center text-capitalize">Video Editing</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4 col-lg-3 col-md-6 col-sm-12">
-                        <div class="wow animate__fadeInUp py-5 service_content_container service_tilt" data-wow-delay="0.6s">
-                            <div class="mb-4 d-flex justify-content-center service_icon_container">
-                                <div class="service_icon" style="width: 60px;">
-                                    <img src="./assets/imgs/icons/photo.png" width="100%" alt="web-design">
-                                </div>
-                            </div>
-                            <div class="service_content">
-                                <h3 class="text-center text-capitalize">Video & Photo shooting</h3>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+                        $time += 0.2 ;
+                    ?>
+                    
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -534,9 +430,12 @@
                 </p>
             </div> -->
             <!-- end global title -->
+
+            @foreach($activeEditions as $activeEdition)
             <div class="wow animate__zoomIn p-1 p-md-3 p-lg-5  show_edition_container">
-                <video controls src="./assets/videos/cover_video.mp4" class="w-100"></video>
+                <video controls src="{{asset('assets/videos/'.$activeEdition->name)}}" class="w-100"></video>
             </div>
+            @endforeach
         </div>
     </section>
     <!-- end show edition video -->
@@ -558,46 +457,14 @@
                     <div id="colla_carousel" class="owl-carousel owl-loaded owl-theme">
                         <div class="owl-stage-outer">
                             <div class="owl-stage">
+                                @foreach($activeCollaboraters as $activeCollaborater)
                                 <div class="owl-item">
                                     <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/bo.jpg" width="100%" style="object-fit: cover;" alt="shine">
+                                        <img src="{{asset('assets/imgs/gallery/'.$activeCollaborater->image)}}" width="100%" style="object-fit: cover;" alt="{{$activeCollaborater->slug}}">
                                     </div>
                                 </div>
-                                <div class="owl-item">
-                                    <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/aungmyintmo.png" width="100%" style="object-fit: cover;" alt="Bo">
-                                    </div>
-                                </div>
-                                <div class="owl-item">
-                                    <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/crystal_dream.jpg" width="100%" style="object-fit: cover;" alt="Aung Myint Mo">
-                                    </div>
-                                </div>
-                                <div class="owl-item">
-                                    <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/issac.jpg" width="100%" style="object-fit: cover;" alt="Bo">
-                                    </div>
-                                </div>
-                                <div class="owl-item">
-                                    <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/np.png" width="100%" style="object-fit: cover;" alt="shine">
-                                    </div>
-                                </div>
-                                <div class="owl-item">
-                                    <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/pyaephyoaung.jpg" width="100%" style="object-fit: cover;" alt="shine">
-                                    </div>
-                                </div>
-                                <div class="owl-item">
-                                    <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/shine.jpg" width="100%" style="object-fit: cover;" alt="shine">
-                                    </div>
-                                </div>
-                                <div class="owl-item">
-                                    <div class="p-2 colla_item_container">
-                                        <img src="./assets/imgs/gallery/superior.jpg" width="100%" style="object-fit: cover;" alt="shine">
-                                    </div>
-                                </div>
+                                @endforeach
+                            
                             </div>
                         </div>
                     </div>
@@ -622,103 +489,25 @@
                 <!-- end global title -->
                 <!-- start portfolio container -->
                 <div class="portfilio_content_container">
-                    <div class="portfolio_content portfolio_1">
+                    <?php $times = 1;  ?>
+                    @foreach($activeProducts as $activeProduct)
+                    <div class="portfolio_content portfolio_<?php echo $times; ?>">
                         
-                        <a href="./assets/imgs/gallery/bo.jpg" class="gallery_pop">
+                        <a href="{{asset('assets/imgs/logos/'.$activeProduct->image)}}" class="gallery_pop">
                             <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-                            <img src="./assets/imgs/gallery/bo.jpg" width="100%" height="100%" style="object-fit: cover;" alt="">
+                            <img src="{{asset('assets/imgs/logos/'.$activeProduct->image)}}" width="100%" height="100%" style="object-fit: cover;" alt="{{$activeProduct->name}}">
                         </a>
                         
                         <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="{{route('mainportfolio.show',1)}}" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
+                            <a href="{{route('mainportfolio.show',$activeProduct->id)}}" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
                         </div>
                     </div>
-                    <div class="portfolio_content portfolio_2"> 
-                        <a href="./assets/imgs/gallery/aungmyintmo.png" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/aungmyintmo.png" width="100%" height="100%" style="object-fit: cover;" alt="">
-                        </a>
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="portfolio_content portfolio_3"> 
-                        <a href="./assets/imgs/gallery/shine.jpg" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/shine.jpg" width="100%" height="100%" style="object-fit: cover;" alt="">
-                        </a>
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="portfolio_content portfolio_4"> 
-                        <a href="./assets/imgs/gallery/bo.jpg" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/bo.jpg" width="100%" height="100%" style="object-fit: cover;" alt="">
-
-                        </a>
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="portfolio_content portfolio_5"> 
-                        <a href="./assets/imgs/gallery/issac.jpg" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/issac.jpg" width="100%" height="100%" style="object-fit: cover;" alt="">
-
-                        </a>
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="portfolio_content portfolio_6">
-                        <a href="./assets/imgs/gallery/crystal_dream.jpg" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/crystal_dream.jpg" width="100%" height="100%" style="object-fit: cover;" alt="">
-
-                        </a> 
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="portfolio_content portfolio_7"> 
-                        <a href="./assets/imgs/gallery/pyaephyoaung.jpg" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/pyaephyoaung.jpg" width="100%" height="100%" style="object-fit: cover;" alt="">
-
-                        </a>
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="portfolio_content portfolio_8"> 
-                        <a href="./assets/imgs/gallery/superior.jpg" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/superior.jpg" width="100%" height="100%" style="object-fit: cover;" alt="">
-
-                        </a>
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="portfolio_content portfolio_9"> 
-                        <a href="./assets/imgs/gallery/np.png" class="gallery_pop">
-                            <span class="d-grid rounded-circle"><i class="fas fa-plus"></i></span>
-
-                            <img src="./assets/imgs/gallery/np.png" width="100%" height="100%" style="object-fit: cover;" alt="">
-
-                        </a>
-                        <div class="d-flex justify-content-center port_folio_link_container">
-                            <a href="./product_detail.html" class="nav-link">Detail <i class="fas fa-angle-right"></i></a>
-                        </div>
-                    </div>
+                    <?php
+                        $times += 1;
+                    ?>
+                    
+                    @endforeach
+                    
                 </div>
 
                 <div class="py-5 d-flex justify-content-center">

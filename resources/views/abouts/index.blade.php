@@ -83,7 +83,7 @@
                     <li>
                         <span>Phone :</span> 
                         <span class="fw-semibold">
-                            @foreach($phones as $phone)
+                            @foreach($activePhones as $phone)
                                 {{$phone -> name}}
                             @endforeach
                         </span>
