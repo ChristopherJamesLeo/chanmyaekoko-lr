@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\MainPortfolio;
+use App\Models\Image;
+use App\Models\Video;
 
 class MainPortfolioController extends Controller
 {
@@ -13,31 +15,17 @@ class MainPortfolioController extends Controller
      */
     public function index()
     {
-        return view("mainportfolio.index");
+        $portfolios = MainPortfolio::orderBy("id","desc")->get();
+        return view("mainportfolio.index",compact("portfolios"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        return view("mainportfolio.read");
+        $portfolio = MainPortfolio::findOrFail($id);
+        $images = Image::where("taggable",$id)->where('imageable',"App\Models\Portfolio")->get();
+        $videos =  Video::where("taggable",$id)->where('videoable',"App\Models\Portfolio")->get();
+
+        return view("mainportfolio.read",compact("portfolio","images","videos"));
     }
 
     /**

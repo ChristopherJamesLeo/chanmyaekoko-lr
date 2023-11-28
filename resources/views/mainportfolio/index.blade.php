@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chan Myae Ko Ko</title>
+    <title>{{$showUserdata -> name}}</title>
 
     <!-- owl carousel css2 js1 -->
-    <link rel="stylesheet" href="./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+    <!-- <link rel="stylesheet" href="./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css"> -->
+    <!-- <link rel="stylesheet" href="./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css"> -->
 
     <!-- font awesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,7 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <!-- custom css -->
-    <link rel="stylesheet" href="./assets/dist/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/dist/css/style.css')}}">
 </head>
 <body>
     <!-- start header section -->
@@ -28,7 +28,7 @@
                 <div class="w-100 d-flex justify-content-between align-items-center ">
                     <a href="{{route('main.index')}}" class="nav-link"><i class="fas fa-caret-left"></i> &nbsp; Home</a>
                     <a href="{{route('main.index')}}" class="navbar-brand">
-                        <span class="fw-bold h3">Chan Myae Ko Ko</span>
+                        <span class="fw-bold h3">{{$showUserdata -> name}}</span>
                     </a>
                 </div>
                 
@@ -39,7 +39,7 @@
         <!-- end nav bar -->
         <!-- start sub banner section -->
         <section class="sub_banner_section">
-            <div class="sub_banner_section_container">
+            <div class="sub_banner_section_container"  style="background-image: linear-gradient(to right,rgba(0,0,0,0.5),rgba(0,0,0,0)),url({{asset('assets/imgs/banners/portfoliobanner.jpg')}});"> 
                 <div class="container">
                     <!-- start sub banner content container -->
                     <div class="sub_banenr_content_container">
@@ -58,132 +58,27 @@
         <div class="">
             <div class="container">
                 <div class="row">
+                    @foreach($portfolios as $portfolio)
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                         <div class="port_folio_content_container"> 
-                            <a href="./product_detail.html" class="nav-link">
+                            <a href="{{route('mainportfolio.show',$portfolio->id)}}" class="nav-link">
                                 <div class="portfolio_img_container">
                                     <div class="over_layer_primary"></div>
                                     <div class="over_layer_secondary"></div>
                                     <div class="portfolio_link">
-                                        <a href="./product_detail.html" class="nav-link"><i class="fas fa-link"></i></a>
+                                        <a href="{{route('mainportfolio.show',$portfolio->id)}}" class="nav-link"><i class="fas fa-link"></i></a>
                                     </div>
-                                    <img src="./assets/imgs/gallery/aungmyintmo.png" width="100%" alt="aungmyintmo">
+                                    <img src="{{asset('assets/imgs/logos/'.$portfolio->image)}}" width="100%" alt="{{$portfolio->name}}">
                                 </div>
                                 <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Aung Myint Mo</h4>
+                                    <h4 class="fw-light text-center">{{$portfolio->name}}</h4>
                                 </div>
                             </a>
                         </div>
 
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="./product_detail.html" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="./product_detail.html" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="./assets/imgs/gallery/bo.jpg" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Bo Mobile</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="./product_detail.html" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="./product_detail.html" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="./assets/imgs/gallery/crystal_dream.jpg" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Crystal Dream</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="./product_detail.html" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="./product_detail.html" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="./assets/imgs/gallery/issac.jpg" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">ISSAC Server</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="./product_detail.html" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="./product_detail.html" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="./assets/imgs/gallery/pyaephyoaung.jpg" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Pyae Phyo Aung</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="./product_detail.html" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="./product_detail.html" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="./assets/imgs/gallery/shine.jpg" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Shine Bag Shop</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="./product_detail.html" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="./product_detail.html" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="./assets/imgs/gallery/superior.jpg" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Superior : Advertising Agency</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
+                    @endforeach
+
                     
                 </div>
             </div>
@@ -330,15 +225,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- jquery 3.6.3 -->
-    <script src="./assets/libs/jquery3-6-3.js"></script>
+    <script src="{{asset('./assets/libs/jquery3-6-3.js')}}"></script>
 
     <!-- magnific pop up css1 js1 -->
-    <script src="./assets/libs/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
+    <!-- <script src="./assets/libs/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script> -->
 
     <!-- owl carousel css2 js1 -->
-    <script src="./assets/libs/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+    <!-- <script src="./assets/libs/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script> -->
 
     <!-- custom js  -->
-    <script src="./assets/dist/js/portfolio.js"></script>
+    <script src="{{asset('./assets/dist/js/portfolio.js')}}"></script>
 </body>
 </html>

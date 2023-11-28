@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$userdata->name}}</title>
+    <title>{{$showUserdata->name}}</title>
 
     <!-- magnific pop up css1 js1 -->
     <link rel="stylesheet" href="{{asset('./assets/libs/Magnific-Popup-master/dist/magnific-popup.css')}}">
@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{asset('./assets/dist/css/style.css')}}">
 </head>
 
-<body>
+<body style="background-image: url({{asset('assets/imgs/backgrounds/body-bg.png.webp')}});">
     <!-- start video over layer -->
     <!-- <div class="video_over_layer">
         <div class="video_timer">
@@ -52,7 +52,7 @@
         <nav class="navbar py-3 navbar-expand-lg">
             <div class="container">
                 <a href="{{route('main.index')}}" class="navbar-brand">
-                    <span class="fw-bold h3">{{$userdata->name}}</span>
+                    <span class="fw-bold h3">{{$showUserdata->name}}</span>
                 </a>
                 <button onclick="nav()" class="p-0 navbar-toggler active border-0 outline-none shadow-none" data-bs-target="#mynav" data-bs-toggle="collapse">
                     <input type="checkbox" id="checkbox">
@@ -94,10 +94,10 @@
                                     <h2 class="fw-semibold text-uppercase">Hello</h2>
                                 </div>
                                 <div class="banner_content_title">
-                                    <h1 class="wow animate__fadeInUp fw-bold text-uppercase">I am {{$userdata->firstname}} </h1>
+                                    <h1 class="wow animate__fadeInUp fw-bold text-uppercase">I am {{$showUserdata->firstname}} </h1>
                                 </div>
                                 <div class=" text-uppercase banner_content_info">
-                                    <p class="fw-semibold"> {{$userdata->job}}</p>
+                                    <p class="fw-semibold"> {{$showUserdata->job}}</p>
                                 </div>
                                 <div class="pt-3">
                                     <div class="d-flex gap-4">
@@ -129,7 +129,7 @@
                         <div class="col-lg-5  d-none d-lg-block banner_img_container">
                             <div class="h-100 d-flex align-items-end overflow-hidden banner_img_container">
                                 <!-- <img src="./assets/imgs/profiles/photo_3_2023-11-02_10-37-40.jpg" style="width: 100%;object-fit: cover;" class="rounded-pill"> -->
-                                <img src="./assets/imgs/profiles/home-right.png.webp" style="width: 100%;object-fit: cover;" class="rounded-pill">
+                                <img src="{{asset('./assets/imgs/profiles/home-right.png.webp')}}" style="width: 100%;object-fit: cover;" class="rounded-pill">
                                 <!-- <img src="./assets/imgs/banners/banner_img.png" style="width: 100%;object-fit: cover;" class=""> -->
                             </div>
                         </div>
@@ -146,11 +146,12 @@
     <section id="resume" class="scrollsection py-5 intro_section">
         <div class="container">
             <div class="row">
+                @foreach($Abouts as $About)
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="d-lg-block">
                         <!-- start show img -->
                         <div class="wow animate__fadeInLeft  p-lg-5 p-md-3 p-sm-1 profile_img_container">
-                            <div class="profile_img" style="background-image: url('./assets/imgs/profiles/photo_4_2023-11-02_10-37-40.jpg');"></div>
+                            <div class="profile_img" style="background-image: url({{asset('assets/imgs/banners/'.$About->image)}});"></div>
                         </div>
                         <!-- end show img -->
                     </div>
@@ -160,9 +161,10 @@
                     <div class=" p-2 p-md-3 p-lg-5 intro_content_container">
                         <!-- start global title -->
                         <div class="wow animate__fadeInUp  global_title">
-                            <h3 class="text-start text-uppercase">Let's <br> Introdute About Myself</h3>
+                            <h3 class="text-start text-uppercase ">{{$About->subname}}</h3>
                             
                         </div>
+                        @endforeach
                         <!-- end global title -->
                         <div class="wow animate__zoomIn">
                             <!-- start global para -->
@@ -179,12 +181,12 @@
                             <ul class="list-unstyled">
                                 <li>
                                     <span>Name :</span> 
-                                    <span class="fw-semibold">{{$userdata -> name}}</span>
+                                    <span class="fw-semibold">{{$showUserdata -> name}}</span>
                                 </li>
                                 <li>
                                     <span>Email :</span> 
                                     <span class="fw-semibold">
-                                        <a href="mailto:{{$userdata->email}}" class="nav-link d-inline-block">{{$userdata->email}}</a>
+                                        <a href="mailto:{{$userdata->email}}" class="nav-link d-inline-block">{{$showUserdata->email}}</a>
                                     </span>
                                 </li>
                                 <li>
@@ -199,7 +201,7 @@
                                 </li>
                                 <li>
                                     <span>Address :</span> 
-                                    <span class="fw-semibold">{{$userdata -> address}}</span>
+                                    <span class="fw-semibold">{{$showUserdata -> address}}</span>
                                 </li>
                             </ul>
                             <!-- end info detail list    -->
@@ -229,10 +231,12 @@
                     <div class="p-2 p-md-3 p-lg-5 col-lg-6  col-md-6 col-sm-12">
                         <!-- start global title -->
                         <div class="wow animate__fadeInUp  global_title">
-                            <h3 class="text-start text-lg-end text-uppercase">Education</h3>
-                            <p class="text-muted text-start text-lg-end ">
-                                Whose given. Were gathered. There first subdue greater. 
+                            @foreach($Educations as $Education)
+                            <h3 class="text-start text-lg-end text-uppercase">{{$Education -> name}}</h3>
+                            <p class="text-muted text-start text-lg-end text-lowercase">
+                                {{$Education->subname}}
                             </p>
+                            @endforeach
                         </div>
                         <!-- end global title -->
                         <!-- start eductaion content -->
@@ -250,19 +254,24 @@
                         <div class="d-lg-block">
                             <!-- start show img -->
                             <div class="wow animate__fadeInRight p-lg-5 p-md-3 p-2 profile_img_container ">
-                                <div class="profile_img secondary"  style="background-image: url('./assets/imgs/profiles/photo_1_2023-11-02_10-37-40.jpg');"></div>
+                                @foreach($Educations as $Education)
+                                <div class="profile_img secondary"  style="background-image: url({{asset('assets/imgs/banners/'.$Education->image)}});"></div>
+                                @endforeach
                             </div>
                             <!-- end show img -->
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="skills_container">
+                        <div class="skills_container" style="background-image: url({{asset('assets/imgs/backgrounds/home-banner.png.webp')}});">
                             <!-- start global title -->
                             <div class="wow animate__fadeInUp  mb-5 mt-5 mt-lg-0 global_title">
-                                <h3 class="text-center  text-uppercase">Skills</h3>
-                                <p class="text-muted  text-center ">
-                                    Whose given. Were gathered. There first subdue greater. 
+                                @foreach($Skills as $Skill)
+                                <h3 class="text-center  text-uppercase">{{$Skill -> name}}</h3>
+                                <p class="text-muted  text-center text-lowercase">
+                                {{$Skill -> subname}} 
                                 </p>
+                                @endforeach
+                                
                             </div>
 
                             <!-- end global title -->
@@ -308,68 +317,35 @@
             <div class="container">
                 <!-- start global title -->
                 <div class="wow animate__fadeInUp global_title">
-                    <h3 class="text-center text-uppercase">Working Experience</h3>
-                    <p class="text-muted text-center ">
-                        Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven midst their. Beast creepeth. Fish days.
+                    @foreach($Experiences as $Experience)
+                    <h3 class="text-center text-uppercase">{{$Experience -> name}}</h3>
+                    <p class="text-muted text-center text-lowercase">
+                        {{$Experience -> subname}}
                     </p>
+                    @endforeach
                 </div>
                 <!-- end global title -->
                 <!-- start experience content -->
                 <div class="">
                     <div class="container">
-                        <div class="p-lg-5 p-md-5 p-1 experience_timeline">
-                            <div class="wow animate__fadeInLeft experience_content_container left">
+                        <div class="p-lg-5 p-md-5 p-1 experience_timeline" style="overflow:scroll;">
+                            @foreach($activeExperiences as $activeExperience )
+                            <div class="wow animate__zoomIn  experience_content_container ">
                                 <div class="experience_content ">
                                     <div class="mb-4 experiece_content_header">
-                                        <h3 class="fw-semibold">First Azure Construction Co. Ltd</h3>
-                                        <small>18 months </small>
+                                        <h3 class="fw-semibold">{{$activeExperience -> company}}</h3>
+                                        <small>{{$activeExperience -> duration}} months </small>
                                     </div>
                                     <div class="experiece_content_body">
-                                        <span class="fw-bold">Office Computer Staff </span>
+                                        <span class="fw-bold">{{$activeExperience -> position}} </span>
                                         <p>
-                                            I started my job at FAC Company as an office computer staffer on February 21, 2020, after GTC was paused because of COVID-19. 
-                                            <br>
-                                            Initially, I am a junior, and the working process is really heavy for me. I'm also a site supervisor.
-                                            <br>
-                                            After 2021, I've become particularly proficient with the working process, such as supervising the sites, managing vehicles, machines, and back-holes, as well as their fuel, working hours, and how much each is done in their own tasks.
-                                            <br>
-                                            The company will cease operations in December 2021. And yeah, I go my way ahead...
-                                            <br>
-                                            This experience taught me about Microsoft Office (Word, Excel, and PowerPoint), Adobe Photoshop, printing skills, and some management theories.
+                                            {{$activeExperience -> description}}
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="wow animate__fadeInRight experience_content_container right">
-                                <div class="experience_content ">
-                                    <div class="mb-4 experiece_content_header">
-                                        <h3>MAY Construction</h3>
-                                        <small>8 months </small>
-                                    </div>
-                                    <div class="experiece_content_body">
-                                        <span class="fw-bold">Graphic Designer & Video Editor  </span>
-                                        <p>
-                                            Actually, I make not only flyers, vendors, banners, and photoboots but also social media ad designs and commercial motion graphics. But also shooting cinematic commercial videos and announcement videos. I've developed stronger skills in Premiere Pro and some other video editing software.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wow animate__fadeInLeft experience_content_container left">
-                                <div class="experience_content ">
-                                    <div class="mb-4 experiece_content_header">
-                                        <h3>Freelance Graphic Designer </h3>
-                                        <small>14 months </small>
-                                    </div>
-                                    <div class="experiece_content_body">
-                                        <span class="fw-bold"></span>
-                                        <p>
-                                            Currently, I'm a freelancer. I work freelance and collaborate with my friends' companies.
-                                            <br>
-                                            And also accept WFH jobs.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -380,15 +356,17 @@
     <!-- end experience section -->
 
     <!-- start service section -->
-    <section id="service" class="scrollsection service_section">
+    <section id="service" class="scrollsection service_section" style="background-image: url({{asset('assets/imgs/backgrounds/home-banner.png.webp')}});">
         <div class="service_section_container">
             <div class="container">
                 <!-- start global title -->
                 <div class="wow animate__fadeInUp global_title">
-                    <h3 class="text-center text-uppercase">Services</h3>
-                    <p class="text-muted text-center ">
-                        Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven midst their. Beast creepeth. Fish days.
+                    @foreach($Services as $Service)
+                    <h3 class="text-center text-uppercase">{{$Service -> name}}</h3>
+                    <p class="text-muted text-center text-lowercase">
+                        {{$Service -> subname}}
                     </p>
+                    @endforeach
                 </div>
                 <!-- end global title -->
                 <div class="py-5 row">
@@ -446,10 +424,12 @@
             <div class="container">
                 <!-- start global title -->
                 <div class="global_title">
-                    <h3 class="text-center text-uppercase">Collaborate With</h3>
-                    <p class="text-muted text-center ">
-                        Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven midst their. Beast creepeth. Fish days.
+                    @foreach($Collaborates as $Collaborate)
+                    <h3 class="text-center text-uppercase">{{$Collaborate -> name}}</h3>
+                    <p class="text-muted text-center text-lowercase">
+                        {{$Collaborate -> subname}}
                     </p>
+                    @endforeach
                 </div>
                 <!-- end global title -->
                 <!-- start collaborator carousel -->
@@ -481,10 +461,12 @@
             <div class="container">
                 <!-- start global title -->
                 <div class="mb-5 global_title">
-                    <h3 class="text-center text-uppercase">Social AD Showcase</h3>
-                    <p class="text-muted text-center ">
-                        Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven midst their. Beast creepeth. Fish days.
+                    @foreach($Portfolios as $Portfolio)
+                    <h3 class="text-center text-uppercase">{{$Portfolio -> name}}</h3>
+                    <p class="text-muted text-center text-lowercase">
+                        {{$Portfolio -> subname}}
                     </p>
+                    @endforeach
                 </div>
                 <!-- end global title -->
                 <!-- start portfolio container -->
@@ -531,9 +513,9 @@
         <div class="container">
             <!-- start global title -->
             <div class=" global_title">
-                <h3 class="text-center text-uppercase">Chan Myae Ko Ko</h3>
+                <h3 class="text-center text-uppercase">{{$showUserdata->name}}</h3>
                 <p class="text-muted text-center">
-                    Graphic Designer
+                    {{$showUserdata->job}}
                 </p>
             </div>
             <!-- end global title -->
@@ -544,20 +526,12 @@
                     </div>
                     <div class="footer_content_body">
                         <ul class="list-unstyled">
+                        @foreach($activeServices as $activeService)
                             <li class="footer_list">
-                                <span>Graphic Design</span>
+                                <span>{{$activeService -> name}}</span>
                             </li>
-                            <li class="footer_list">
-                                <span>
-                                    Motion Graphic
-                                </span>
-                            </li>
-                            <li class="footer_list">
-                                <span>Video Editing</span>
-                            </li>
-                            <li class="footer_list">
-                                <span>Video & Photo Shooting</span>
-                            </li>
+                        @endforeach
+                            
                         </ul>
                     </div>
                     
@@ -603,20 +577,21 @@
                         <ul class="list-unstyled">
                             <li class="footer_list">
                                 <span>
-                                    <a href="mailto:chamyaekoko200738@gmail.com" class="nav-link ">chamyaekoko200738@gmail.com</a>
+                                    <a href="mailto:{{$showUserdata -> email}}" class="nav-link ">{{$showUserdata -> email}}</a>
                                 </span>
                             </li>
                             <li class="footer_list">
                                 <span>
-                                    <a href="tel: +95 9400110179" class="nav-link  "> 09400110179,09250200612</a>
+                                    @foreach($activePhones as $phone)
+                                            @foreach($activePhone as $activePh)
+                                            <a href="tel:{{$activePh->name}}" class="nav-link d-inline-block">{{$phone -> name}}</a>
+                                            @endforeach
+                                    @endforeach</a>
                                 </span>
                             </li>
                             <li class="footer_list">
                                 <span>
-                                    Between 48 & 49 ,
-                                    Mya Ye Nandar Housing,
-                                    Chan Mya Tharzi Tsp,
-                                    Mandalay
+                                    {{$showUserdata -> address}}
                                 </span>
                             </li>
                             <li  class="footer_list">
@@ -637,10 +612,10 @@
                                         </a>
                                     </li>
                                 </ul>
-                                @if (Route::has('login'))
+                                <!-- @if (Route::has('login'))
                                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                                         @auth
-                                            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                                            <a href="{{ url('/dashboards') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                                         @else
                                             <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
                     
@@ -649,7 +624,7 @@
                                             @endif
                                         @endauth
                                     </div>
-                                @endif
+                                @endif -->
                             </li>
                         </ul>
                     </div>

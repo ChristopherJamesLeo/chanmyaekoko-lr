@@ -6,8 +6,8 @@
     <title>Chan Myae Ko Ko</title>
 
     <!-- owl carousel css2 js1 -->
-    <link rel="stylesheet" href="{{asset('./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css')}}"> -->
+    <!-- <link rel="stylesheet" href="{{asset('./assets/libs/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css')}}"> -->
 
     <!-- font awesome  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,12 +40,12 @@
         <!-- end nav bar -->
         <!-- start sub banner section -->
         <section class="sub_banner_section">
-            <div class="sub_banner_section_container">
+            <div class="sub_banner_section_container" style="background-image: linear-gradient(to right,rgba(0,0,0,0.5),rgba(0,0,0,0)),url({{asset('assets/imgs/banners/portfoliobanner.jpg')}});">
                 <div class="container">
                     <!-- start sub banner content container -->
                     <div class=" sub_banenr_content_container">
-                        <h3 class="text-white">Bo Mobile Mandalay</h3>
-                        <span class="text-white product_type">Phone Service & Accessories Shop</span>
+                        <h3 class="text-white">{{$portfolio->name}}</h3>
+                        <span class="text-white product_type">{{$portfolio->kind}}</span>
                         
                     </div>
                     <!-- end sub banner content container -->
@@ -62,62 +62,31 @@
                 <div class="row">
                     <div class="d-none d-md-block col-lg-6 col-md-12 mb-3">
                         <div class="p-md-3 p-1 product_photo_container  ">
-                            <img src="{{asset('./assets/imgs/gallery/bo.jpg')}}" class="border border-1" width="100%"  style="object-fit: cover;" alt="">
+                            <img src="{{asset('/assets/imgs/logos/'.$portfolio->image)}}" class="border border-1" width="100%"  style="object-fit: cover;" alt="">
                         </div>
                     </div>
                     
                     <div class="col-lg-6 col-md-12  mb-3">
                         <div class=" product_content_detail ">
                             <div class="row mb-3">
+
                                 <div class="col-lg-4 col-md-6 p-1 p-lg-3">
                                     <div class="product_detail_img_container">
                                         <a href="javascript:void(0)" class="nav-link product_detail_img">
-                                            <img src="{{asset('./assets/imgs/gallery/bo.jpg')}}" style="object-fit: cover;" width="100%" alt="">
+                                            <img src="{{asset('/assets/imgs/logos/'.$portfolio->image)}}" style="object-fit: cover;" width="100%" alt="{{$portfolio->image}}">
                                         </a>
                                     </div>
                                 </div>
+                                @foreach($images as $image)
                                 <div class="col-lg-4 col-md-6 p-1 p-lg-3">
                                     <div class="product_detail_img_container">
                                         <a href="javascript:void(0)" class="nav-link product_detail_img">
-                                            <img src="{{asset('./assets/imgs/gallery/bo_bus_card.jpg')}}"  style="object-fit: cover;" width="100%" alt="">
+                                            <img src="{{asset('./assets/imgs/products/'.$image->name)}}" style="object-fit: cover;" width="100%" alt="{{$image->name}}">
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 p-1 p-lg-3">
-                                    <div class="product_detail_img_container">
-                                        <a href="javascript:void(0)" class="nav-link product_detail_img">
-                                            <img src="{{asset('./assets/imgs/gallery/bo_bag.jpg')}}"  style="object-fit: cover;" width="100%" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 p-1 p-lg-3">
-                                    <div class="product_detail_img_container">
-                                        <a href="javascript:void(0)" class="nav-link product_detail_img">
-                                            <img src="{{asset('./assets/imgs/gallery/bo_card.jpg')}}"  style="object-fit: cover;" width="100%" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 p-1 p-lg-3">
-                                    <div class="product_detail_img_container">
-                                        <a href="javascript:void(0)" class="nav-link product_detail_img">
-                                            <img src="{{asset('./assets/imgs/gallery/bo_fb.jpg')}}"  style="object-fit: cover;" width="100%" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 p-1 p-lg-3">
-                                    <div class="product_detail_img_container">
-                                        <a href="javascript:void(0)" class="nav-link product_detail_img">
-                                            <img src="{{asset('./assets/imgs/gallery/bo_poster.jpg')}}" style="object-fit: cover;" width="100%" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 p-1 p-lg-3">
-                                    <div class="product_detail_img_container">
-                                        <a href="javascript:void(0)" class="nav-link product_detail_img">
-                                            <img src="{{asset('./assets/imgs/gallery/bo_voucher.jpg')}}" style="object-fit: cover;" width="100%" alt="">
-                                        </a>
-                                    </div>
-                                </div>
+                                @endforeach
+
                             </div>
                             
                             
@@ -128,7 +97,7 @@
                         <h4>Description</h4>
                         <div class="global_para">
                             <p class="fw-light">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste quae, perspiciatis iure minima distinctio tempora, blanditiis porro, doloribus a fugit. Est rem nemo ducimus quos deserunt, libero iusto cum?
+                                {{$portfolio -> description}}
                             </p>
                         </div>
                     </div>
@@ -152,7 +121,9 @@
             </div> -->
             <!-- end global title -->
             <div class="wow animate__zoomIn p-1 p-md-3 p-lg-5  show_edition_container">
-                <video controls src="{{asset('./assets/videos/cover_video.mp4')}}" class="w-100"></video>
+                @foreach($videos as $video)
+                <video controls src="{{asset('assets/videos/'.$video->name)}}" class="w-100"></video>
+                @endforeach
             </div>
         </div>
     </section>
@@ -163,12 +134,12 @@
         <div class="">
             <div class="container">
                 <!-- start global title -->
-                <div class="mb-3 global_title">
+                <!-- <div class="mb-3 global_title">
                     <h3 class="text-center text-uppercase">Related Products</h3>
                    
-                </div>
+                </div> -->
                 <!-- end global title -->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                         <div class="port_folio_content_container"> 
                             <a href="#" class="nav-link">
@@ -243,7 +214,7 @@
                     </div>
 
                     
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -386,15 +357,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <!-- jquery 3.6.3 -->
-    <script src="./assets/libs/jquery3-6-3.js"></script>
+    <script src="{{asset('./assets/libs/jquery3-6-3.js')}}"></script>
 
     <!-- magnific pop up css1 js1 -->
-    <script src="./assets/libs/Magnific-Popup-master/dist/jquery.magnific-popup.min.js"></script>
+    <script src="{{asset('./assets/libs/Magnific-Popup-master/dist/jquery.magnific-popup.min.js')}}"></script>
 
     <!-- owl carousel css2 js1 -->
-    <script src="./assets/libs/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+    <!-- <script src="./assets/libs/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script> -->
 
     <!-- custom js -->
-    <script src="./assets/dist/js/product_detail.js"></script>
+    <script src="{{asset('/assets/dist/js/product_detail.js')}}"></script>
 </body>
 </html>

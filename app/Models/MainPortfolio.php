@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class MainPortfolio extends Model
 {
     use HasFactory;
+
+    protected $table = "portfolios";
+
+    protected $primaryKey = "id";
+
 }
