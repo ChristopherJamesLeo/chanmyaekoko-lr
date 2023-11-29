@@ -186,7 +186,7 @@
                                 <li>
                                     <span>Email :</span> 
                                     <span class="fw-semibold">
-                                        <a href="mailto:{{$userdata->email}}" class="nav-link d-inline-block">{{$showUserdata->email}}</a>
+                                        <a href="mailto:{{$showUserdata->email}}" class="nav-link d-inline-block">{{$showUserdata->email}}</a>
                                     </span>
                                 </li>
                                 <li>
