@@ -60,6 +60,14 @@
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="block mt-2">
+                        <label for="remember_me" class="inline-flex items-center">
+                            <input id="remember_me" type="checkbox" class="" name="remember">
+                            <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                        </label>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-end mt-3">
                     <button class="btn btn-primary rounded-1 shadow-none outline-none">{{ __('Log in') }}</button>
                 </div>
