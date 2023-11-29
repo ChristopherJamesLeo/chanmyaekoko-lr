@@ -11,7 +11,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-2">
                                 <div class="form-group">
-                                    <input type="text" name="name" id="service_type" class="form-control form-control-md shadow-none outline-none" placeholder="App Type" required >
+                                    <input type="text" name="name" id="service_type" class="form-control form-control-md shadow-none outline-none" placeholder="Facebook / Viber / Telegram / Whatsapp / Youtube / Email" required >
                                 </div>
                             </div>
                             <div class="col-md-6 mb-2">

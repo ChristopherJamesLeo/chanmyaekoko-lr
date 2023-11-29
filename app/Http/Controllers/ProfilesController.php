@@ -57,6 +57,29 @@ class ProfilesController extends Controller
 
         $profile -> address = $request["address"];
 
+        if($request->hasfile("cv")){
+
+            $this -> validate($request,[
+                "cv" => "required|mimes:pdf|max:2048"
+            ]);
+
+            $filepath = "assets/files/".$profile->cv;
+
+            if(File::exists($filepath)){
+                File::delete($filepath);
+            }
+
+            $file = $request -> file("cv");
+
+            $filename = $file->getClientOriginalName();
+
+            $newfilename = uniqid().time()."cv".$filename;
+
+            $file -> move(public_path("assets/files/"),$newfilename);
+
+            $profile->cv = $newfilename;
+        }
+
         if($request->hasfile("image")){
 
             $this -> validate($request,[

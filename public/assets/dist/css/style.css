@@ -441,7 +441,7 @@ body {
     content: "";
     width: 175px;
     height: 175px;
-    background-image: url("assets/imgs/icons/client-info-bg.png.webp");
+    background-image: url({{asset('assets/imgs/icons/client-info-bg.png.webp')}});
 
     position: absolute;
     right: 0;
@@ -705,7 +705,7 @@ body {
 /* end collaborage section */
 /* start portfoio section */
 .portfolio_section {
-    background-image: url("assets/imgs/backgrounds/home-banner.png.webp");
+    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

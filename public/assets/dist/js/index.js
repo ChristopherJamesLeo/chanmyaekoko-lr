@@ -160,12 +160,19 @@ function getnavscroll(idx){
 }
 // end scroll nav active
 
+
+
+
+
 // start copy right 
 let getdate = new Date();
 let getYear = getdate.getFullYear();
 // console.log(getYear);
 document.querySelector("#copyRightYear").innerText = getYear;
 // end copy right
+
+
+
 
 
 // start wow

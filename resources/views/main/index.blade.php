@@ -71,9 +71,48 @@
                         <li class="nav-item px-3"><a href="#contact" class="fw-semibold nav-link scrollNav">Contact</a></li>
                         <li class="nav-item px-3 d-flex justify-content-center align-items-center">
                             <ul class="list-unstyled d-flex  m-0 p-0">
-                                <li class="px-2"><a href="#" id="" class="nav-link"><i class="fab fa-facebook-f"></i></a></li>
-                                <li class="px-2"><a href="#" id="" class="nav-link"><i class="fab fa-viber"></i></a></li>
-                                <li class="px-2"><a href="#" id="" class="nav-link"><i class="fab fa-telegram-plane"></i></a></li>
+                                @foreach($showActiveLinks as $activeLink)
+                                    
+                                        @if($activeLink["name"] === "facebook")
+                                        <li class="px-2">
+                                            <a href="{{$activeLink->link}}" id="" class="nav-link">
+                                                <i class="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        @elseif($activeLink["name"] === "telegram")
+                                        <li class="px-2">
+                                            <a href="https://t.me/{{$activeLink->link}}" id="" class="nav-link">
+                                                <i class="fab fa-telegram-plane"></i>
+                                            </a>
+                                        </li> 
+                                        @elseif($activeLink["name"] === "viber") 
+                                        <li class="px-2">
+                                            <a href="viber://chat?number={{$activeLink->link}}" id="" class="nav-link">
+                                                <i class="fab fa-viber"></i>
+                                            </a>
+                                        </li>
+                                        @elseif($activeLink["name"] === "whatsapp") 
+                                        <li class="px-2">
+                                            <a href="https://api.whatsapp.com/send?phone={{$activeLink->link}}" id="" class="nav-link">
+                                                <i class="fab fa-whatsapp"></i>
+                                            </a>
+                                        </li>
+                                        @elseif($activeLink["name"] === "youtube") 
+                                        <li class="px-2">
+                                            <a href="{{$activeLink->link}}" id="" class="nav-link">
+                                                <i class="fab fa-youtube"></i>
+                                            </a>
+                                        </li>
+                                        @elseif($activeLink["name"] === "email") 
+                                        <li class="px-2">
+                                            <a href="mailto:{{$activeLink->link}}" id="" class="nav-link">
+                                                <i class="fas fa-envelope"></i>
+                                            </a>
+                                        </li>
+                                        @endif
+                                    
+                                @endforeach
+                                
                             </ul>
                         </li>
                     </ul>
@@ -107,13 +146,13 @@
                                             </span>
                                             <span class="overlayer"></span>
                                         </button> -->
-                                        <a href="#" class="nav-link d-inline-block global_btn">
+                                        <a href="#contact" class="nav-link d-inline-block global_btn">
                                             <span class="label">
                                                 <span>Hire Me</span>
                                             </span>
                                             <span class="overlayer"></span>
                                         </a>
-                                        <a href="#" class="nav-link d-inline-block global_btn secondary">
+                                        <a href="javascript:void(0)" class="nav-link d-inline-block global_btn secondary getCv">
                                             <span class="label">
                                                 <span>Get Cv</span>
                                             </span>
@@ -209,7 +248,7 @@
                         
 
                         <div class="mt-5 d-flex down_load_btn_container">
-                            <a href="#" class="nav-link d-inline-block global_btn">
+                            <a href="javascript:void(0)" class="nav-link d-inline-block global_btn getCv">
                                 <span class="label">
                                     <span>Download Cv</span>
                                 </span>
@@ -456,7 +495,7 @@
     <!-- end collaborator section -->
 
     <!-- start portfolio section -->
-    <section id="portfolio" class="scrollsection mb-5 portfolio_section">
+    <section id="portfolio" class="scrollsection mb-5 portfolio_section" style="background-image: url({{asset('assets/imgs/backgrounds/home-banner.png.webp')}});">
         <div class="protfolio_section_container">
             <div class="container">
                 <!-- start global title -->
@@ -596,21 +635,23 @@
                             </li>
                             <li  class="footer_list">
                                 <ul class=" list-unstyled d-flex m-0 p-0 contact_link">
+                                @foreach($showActiveLinks as $activeLink)
                                     <li class="px-2">
-                                        <a href="#" id="" class="nav-link">
+                                        <a href="{{$activeLink->link}}" id="" class="nav-link">
+                                        @if($activeLink["name"] === "facebook")
                                             <i class="fab fa-facebook-f"></i>
-                                        </a>
-                                    </li>
-                                    <li class="px-2">
-                                        <a href="#" id="" class="nav-link">
+                                        @elseif($activeLink["name"] === "telegram")
+                                            <i class="fab fa-telegram-plane"></i>  
+                                        @elseif($activeLink["name"] === "viber") 
                                             <i class="fab fa-viber"></i>
+                                        @elseif($activeLink["name"] === "youtube") 
+                                            <i class="fab fa-youtube"></i>
+                                            @elseif($activeLink["name"] === "tiktok") 
+                                            <i class="fab fa-tiktok"></i>
+                                        @endif
                                         </a>
                                     </li>
-                                    <li class="px-2">
-                                        <a href="#" id="" class="nav-link">
-                                            <i class="fab fa-telegram-plane"></i>
-                                        </a>
-                                    </li>
+                                @endforeach
                                 </ul>
                                 <!-- @if (Route::has('login'))
                                     <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
@@ -662,5 +703,34 @@
     <script src="{{asset('./assets/libs/tilt.js-master/dest/tilt.jquery.min.js')}}"></script>
 
     <script src="{{asset('./assets/dist/js/index.js')}}"></script>
+
+    <script>
+        // download cv 
+
+        function downloadFile(url, fileName){
+            fetch(url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
+              .then(res => res.blob())
+              .then(res => {
+                const aElement = document.createElement('a');
+                aElement.setAttribute('download', fileName);
+                const href = URL.createObjectURL(res);
+                aElement.href = href;
+                // aElement.setAttribute('href', href);
+                aElement.setAttribute('target', '_blank');
+                aElement.click();
+                URL.revokeObjectURL(href);
+              });
+        };
+
+          
+        let getDownloadBtns = document.querySelectorAll(".getCv");
+
+        getDownloadBtns.forEach(function(getDownloadBtn){
+            getDownloadBtn.addEventListener("click",function () {
+                downloadFile("{{asset('assets/files/'.$showUserdata->cv)}}", 'chan_myae_ko_ko_cv');
+            })
+        })
+
+    </script>
 </body>
 </html>

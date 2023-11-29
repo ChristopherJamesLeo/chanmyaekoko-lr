@@ -1,7 +1,10 @@
 @extends("layouts.pagesindex")
+
 @section("libs")
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection 
+
+
 @section("content")
     <div class="row">
         
@@ -20,8 +23,10 @@
                         </div>
                         <div class="row gap-2">
                             @foreach($images as $image)
-                                <div class="col-lg-2 col-md-3 col-sm-6 p-0">
+                                <div class=" col-lg-2 col-md-3 col-sm-6 p-0">
                                     <img src="{{asset('assets/imgs/products/'.$image->name)}}" width="100%"  alt="{{$image->name}}">
+
+                                    
                                 </div>  
                             @endforeach
                         </div>

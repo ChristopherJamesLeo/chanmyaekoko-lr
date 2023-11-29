@@ -9,7 +9,7 @@
                 <div class="mb-3 content_title">
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-sm-6">
-                            <img src="{{asset('asstes/imgs/gallery/'.$collaborate->image)}}" width="100%"  alt="">
+                            <img src="{{asset('assets/imgs/gallery/'.$collaborate->image)}}" width="100%"  alt="">
                         </div>
                     </div>
                     

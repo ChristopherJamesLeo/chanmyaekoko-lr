@@ -28,6 +28,8 @@
             background-color: var(--global-primay-colo);
         }
     </style>
+
+    @yield("style")
 </head>
 <body>
     <!-- preloader -->

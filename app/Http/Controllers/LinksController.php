@@ -33,7 +33,7 @@ class LinksController extends Controller
 
         $link = new Link();
 
-        $link -> name = $request["name"];
+        $link -> name = strtolower($request["name"]);
 
         $link -> link = $request["link"];
 
@@ -57,9 +57,10 @@ class LinksController extends Controller
 
         $link = Link::findOrFail($id);
 
-        $link -> name = $request["name"];
+        $link -> name = strtolower($request["name"]);
 
         $link -> link = $request["link"];
+        
         $link -> status_id = $request["status_id"];
 
         $link -> save();

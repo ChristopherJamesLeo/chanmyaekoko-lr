@@ -7,6 +7,7 @@ use App\Http\Controllers\CollaboratesController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\EditionsController;
 use App\Http\Controllers\ExperiencesController;
+use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LinksController;
 use App\Http\Controllers\ProfileController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\StatusesController;
 use App\Http\Controllers\TypesController;
 use App\Http\Controllers\TitlesController;
+use App\Http\Controllers\VideosController;
 
 
 
@@ -66,6 +68,10 @@ Route::middleware('auth')->group(function () {
     Route::resource("/portfolios",PortfoliosController::class);
     Route::resource("/profiles",ProfilesController::class);
     Route::put("/profilesimages/{id}",[ProfileImageController::class,"update"])->name("profileimage.upload");
+    Route::put("/images/{id}",[ImagesController::class,"update"])->name("images.update");
+    Route::delete("/images/{id}",[ImagesController::class,"destroy"])->name("images.destroy");
+    Route::put("/videos/{id}",[VideosController::class,"update"])->name("videos.update");
+    Route::delete("/videos/{id}",[VideosController::class,"destroy"])->name("videos.destroy");
     Route::resource("/logins",LoginController::class);
     Route::resource("/links",LinksController::class);
     Route::resource("/phones",PhonesController::class);

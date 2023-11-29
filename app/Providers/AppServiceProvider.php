@@ -55,6 +55,8 @@ class AppServiceProvider extends ServiceProvider
 
             $activeLinks = Link::where("status_id",1)->get();
 
+            $showActiveLinks = Link::where("status_id",1)->limit(3)->get();
+
             $activeExperiences = Experience::where("status_id",1)->orderBy("id","desc")->get();
 
             $activeCollaboraters = Collaborate::where("status_id",1)->orderBy("id","desc")->get();
@@ -70,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
             $Portfolios = Title::where("id",7)->get();
 
 
-            $view->with("showUserdata",$showUserdata)->with("activeAbouts",$activeAbouts)->with("userdata",$userdata)->with("activeEditions",$activeEditions)->with("activeEducations",$activeEducations)->with("activeSkills", $activeSkills)->with("activeServices",$activeServices)->with("activePhones",$activePhones)->with("activeLinks",$activeLinks)->with("activeExperiences",$activeExperiences)->with("activeCollaboraters",$activeCollaboraters)->with("activeProducts",$activeProducts)->with("activePhone",$activePhone)->with("Abouts",$Abouts)->with("Educations", $Educations)->with("Skills",$Skills)->with("Experiences",$Experiences)->with("Services",$Services)->with("Collaborates",$Collaborates)->with("Portfolios",$Portfolios);
+            $view->with("showUserdata",$showUserdata)->with("activeAbouts",$activeAbouts)->with("userdata",$userdata)->with("activeEditions",$activeEditions)->with("activeEducations",$activeEducations)->with("activeSkills", $activeSkills)->with("activeServices",$activeServices)->with("activePhones",$activePhones)->with("activeLinks",$activeLinks)->with("activeExperiences",$activeExperiences)->with("activeCollaboraters",$activeCollaboraters)->with("activeProducts",$activeProducts)->with("activePhone",$activePhone)->with("Abouts",$Abouts)->with("Educations", $Educations)->with("Skills",$Skills)->with("Experiences",$Experiences)->with("Services",$Services)->with("Collaborates",$Collaborates)->with("Portfolios",$Portfolios)->with("showActiveLinks",$showActiveLinks);
         });
     }
 }

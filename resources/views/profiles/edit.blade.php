@@ -43,6 +43,12 @@
                                     <input type="text" name="address" id="" class="form-control form-control-md shadow-none outline-none" placeholder="Enter Your Address" required  value="{{$profile -> address}}" >
                                 </div>
                             </div>
+                            <div class="col-lg-12 mb-2">
+                                <div class="form-group">
+                                    <label for="cvform">Enter Your Cv Form (PDF)</label>
+                                    <input type="file" name="cv" id="cvform" class="form-control form-control-md shadow-none outline-none" >
+                                </div>
+                            </div>
                             <div class="d-flex flex-wrap justify-content-end align-items-center gap-3">
                                 <button type="submit" class="btn rounded-1 ">Update <i class="fas fa-cloud-upload-alt"></i></button>
                                 <button type="reset"  class="btn rounded-1 secondary ">Reset <i class="fas fa-sync"></i></button>

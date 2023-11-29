@@ -100,6 +100,11 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li class="py-1">
+                                    <div class="row align-items-center">
+                                        <a href="javascript:void(0)" id="showCv" class="nav-link btn rounded-1">Show Cv <i class="fas fa-download ms-2"></i></a>
+                                    </div>
+                                </li>
                             </ul>
                             <!-- start btn container -->
                             <div class="mt-4 d-flex flex-wrap justify-content-end align-items-center gap-2">
@@ -190,6 +195,30 @@
             fileReader.readAsDataURL(this.files[0]);
         })
         // end show preview img
+
+                // download cv 
+
+                function downloadFile(url, fileName){
+            fetch(url, { method: 'get', mode: 'no-cors', referrerPolicy: 'no-referrer' })
+              .then(res => res.blob())
+              .then(res => {
+                const aElement = document.createElement('a');
+                aElement.setAttribute('download', fileName);
+                const href = URL.createObjectURL(res);
+                aElement.href = href;
+                // aElement.setAttribute('href', href);
+                aElement.setAttribute('target', '_blank');
+                aElement.click();
+                URL.revokeObjectURL(href);
+              });
+        };
+
+          
+        let getDownloadBtn = document.querySelector("#showCv");
+
+        getDownloadBtn.addEventListener("click",function () {
+            downloadFile("{{asset('assets/files/'.$showUserdata->cv)}}", 'chan_myae_ko_ko_cv');
+        })
     </script>
     <!-- end custom  js -->
 @endsection
