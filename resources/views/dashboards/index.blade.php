@@ -153,6 +153,21 @@
                                 <i class="fas fa-key" title="Login"></i><span>Login</span>
                             </a>
                         </li>
+                        <li class="py-2">
+                            <a href="route('logout')" class="nav-link log_out_btn">
+                            <form method="POST" id="log_out" class="d-block" action="{{ route('logout') }}">
+                                @csrf
+
+                                    <i class="fas fa-lock-open me-4" title="LogOut"></i><span>{{ __('Log Out') }}</span>
+                                
+
+                            </form>
+                            </a>
+                            
+                            
+                                
+                            
+                        </li>
                     </ul>
                     <div class="list_header">
                         <h3 class="">
@@ -241,5 +256,16 @@
 
     <!-- custom js -->
     <script src="./../assets/dist-adm/js/main.js"></script>
+
+    <script>
+        document.querySelector(".log_out_btn").addEventListener("click",function(e){
+            e.preventDefault();
+            if(window.confirm("Are You Sure To Log Out")){
+                document.querySelector("#log_out").submit();
+            }else{
+                window.reload();
+            }
+        })  
+    </script>
 </body>
 </html>

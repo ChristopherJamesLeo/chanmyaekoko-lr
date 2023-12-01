@@ -41,24 +41,23 @@
                             <!-- end education content -->
                         </div>
 
-                        <div class="mb-4 py-4 px-3 border rounded-1 professional_jobs">
-                            <h3>Services</h3>
+                        
+                        <div class="mb-4 py-4 px-3 border rounded-1 skills">
+                            <h3>collaborator</h3>
                             <ul class="list-unstyled professional_jobs_infos">
-                                @foreach($activeServices as $activeService)
+                                @foreach($activeCollaboraters as $activeCollaborater)
                                 <li class="py-1">
-                                    <span>{{$activeService->name}}</span>
+                                    <span>{{$activeCollaborater->name}}</span>
                                 </li>
                                 @endforeach
-                                
                             </ul>
                         </div>
-
                         <div class="mb-4 py-4 px-3 border rounded-1 skills">
-                            <h3>Skills</h3>
+                            <h3>Products</h3>
                             <ul class="list-unstyled professional_jobs_infos">
-                                @foreach($activeSkills as $activeSkill)
+                                @foreach($activeProducts as $activeProduct)
                                 <li class="py-1">
-                                    <span>{{$activeSkill->subject}}</span>
+                                    <span>{{$activeProduct->name}}</span>
                                 </li>
                                 @endforeach
                                 
@@ -114,28 +113,29 @@
                             </ul>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="mb-4 py-4 px-3 border rounded-1 skills">
-                                    <h3>collaborator</h3>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="mb-4 py-4 px-3 border rounded-1 professional_jobs">
+                                    <h3>Services</h3>
                                     <ul class="list-unstyled professional_jobs_infos">
-                                        @foreach($activeCollaboraters as $activeCollaborater)
+                                        @foreach($activeServices as $activeService)
                                         <li class="py-1">
-                                            <span>{{$activeCollaborater->name}}</span>
+                                            <span>{{$activeService->name}}</span>
                                         </li>
                                         @endforeach
+
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-12">
+                            <div class="col-lg-6 col-md-12 mb-4">
                                 <div class="mb-4 py-4 px-3 border rounded-1 skills">
-                                    <h3>Products</h3>
+                                    <h3>Skills</h3>
                                     <ul class="list-unstyled professional_jobs_infos">
-                                        @foreach($activeProducts as $activeProduct)
+                                        @foreach($activeSkills as $activeSkill)
                                         <li class="py-1">
-                                            <span>{{$activeProduct->name}}</span>
+                                            <span>{{$activeSkill->subject}}</span>
                                         </li>
                                         @endforeach
-                                        
+
                                     </ul>
                                 </div>
                             </div>

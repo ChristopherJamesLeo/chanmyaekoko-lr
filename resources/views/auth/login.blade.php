@@ -39,7 +39,7 @@
 </style>
 <body>
     <div class="log_inbox_container" style="background-image: url({{asset('assets/imgs/backgrounds/loginBackground.png')}});">
-        <div class="log_inbox">
+        <div class="log_inbox rounded-1">
             <form  method="POST" action="{{ route('login') }}">
             @csrf
                 <h4 class="mb-2">Hello - {{$showUserdata -> firstname}}</h4>

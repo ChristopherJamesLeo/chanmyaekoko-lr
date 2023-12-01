@@ -32,9 +32,10 @@ getTabs.forEach(function(getTab,idx){
         
         let getPageName = getPages[getIdx];
         // console.log(getPageName);
-
         getFrame.src = " ";
         getFrame.src = `http://127.0.0.1:8000/${getPageName}`;
+
+
     })
 })
 
