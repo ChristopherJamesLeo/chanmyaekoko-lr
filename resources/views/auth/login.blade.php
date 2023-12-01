@@ -16,7 +16,9 @@
         height : 100vh;
         display : grid;
         place-items: center;
-        background: rgba(243, 244 ,246 ,1)
+        
+        background-position: center;
+        background-repeat : no-repeat;
     }
     .log_inbox {
         width: 380px;
@@ -36,7 +38,7 @@
 
 </style>
 <body>
-    <div class="log_inbox_container">
+    <div class="log_inbox_container" style="background-image: url({{asset('assets/imgs/backgrounds/loginBackground.png')}});">
         <div class="log_inbox">
             <form  method="POST" action="{{ route('login') }}">
             @csrf
@@ -68,7 +70,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end mt-3">
+                <div class="d-grid mt-3">
                     <button class="btn btn-primary rounded-1 shadow-none outline-none">{{ __('Log in') }}</button>
                 </div>
             </form>
