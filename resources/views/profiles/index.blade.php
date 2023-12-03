@@ -53,6 +53,37 @@
 
 
                         </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="mb-4 py-4 px-3 border rounded-1 professional_jobs">
+                                    <h3>Services</h3>
+                                    <ul class="list-unstyled professional_jobs_infos">
+                                        @foreach($activeServices as $service)
+                                        <li class="py-1">
+                                            <span>{{ $service -> name }}</span>
+                                        </li>
+                                        @endforeach
+                                        
+                                    
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-1">
+                                <div class="mb-4 py-4 px-3 border rounded-1 skills">
+                                    <h3>Skills</h3>
+                                    <ul class="list-unstyled professional_jobs_infos">
+
+                                        @foreach($activeSkills as $skill)
+                                        <li class="py-1">
+                                            <span>{{$skill -> type}}</span>
+                                        </li>
+                                        @endforeach
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-8 col-md-6 col-sm-12">
                         <div class="mb-4 py-4 px-3 border rounded-1 profile_info_container">
@@ -130,37 +161,7 @@
                         </div>
 
                         
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="mb-4 py-4 px-3 border rounded-1 professional_jobs">
-                                    <h3>Services</h3>
-                                    <ul class="list-unstyled professional_jobs_infos">
-                                        @foreach($activeServices as $service)
-                                        <li class="py-1">
-                                            <span>{{ $service -> name }}</span>
-                                        </li>
-                                        @endforeach
-                                        
-                                    
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-sm-1">
-                                <div class="mb-4 py-4 px-3 border rounded-1 skills">
-                                    <h3>Skills</h3>
-                                    <ul class="list-unstyled professional_jobs_infos">
-
-                                        @foreach($activeSkills as $skill)
-                                        <li class="py-1">
-                                            <span>{{$skill -> type}}</span>
-                                        </li>
-                                        @endforeach
-                                        
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
