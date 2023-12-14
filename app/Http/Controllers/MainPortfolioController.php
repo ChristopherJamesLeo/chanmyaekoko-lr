@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\MainPortfolio;
+use App\Models\Portfolio;
+use App\Models\Type;
 use App\Models\Image;
 use App\Models\Video;
 
@@ -25,30 +27,20 @@ class MainPortfolioController extends Controller
         $images = Image::where("taggable",$id)->where('imageable',"App\Models\Portfolio")->get();
         $videos =  Video::where("taggable",$id)->where('videoable',"App\Models\Portfolio")->get();
 
-        return view("mainportfolio.read",compact("portfolio","images","videos"));
+        // start related products
+        $gettypes = Portfolio::findOrFail($id)->types;
+
+        $relportfolios;
+
+        foreach($gettypes as $gettype){
+            $gettypeid = $gettype->id;
+
+            $relportfolios = Type::findOrFail($gettypeid)->typeable; 
+
+        }
+
+        // end related products
+        return view("mainportfolio.read",compact("portfolio","images","videos","relportfolios"));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

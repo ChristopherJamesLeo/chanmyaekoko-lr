@@ -15,5 +15,8 @@ class Type extends Model
 
     protected $guarded = [];
 
+    public function typeable(){
+        return $this -> morphedByMany(Portfolio::class,"typeable");
+    }
 
 }

@@ -27,4 +27,9 @@ class Portfolio extends Model
         return $this -> belongsTo(Status::class);
     }
 
+
+    public function types(){
+        return $this -> morphToMany(Type::class,"typeable");
+    }
+
 }

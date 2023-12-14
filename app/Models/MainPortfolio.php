@@ -13,4 +13,23 @@ class MainPortfolio extends Model
 
     protected $primaryKey = "id";
 
+    protected $fillable = [
+        "name",
+        "kind",
+        "image",
+        "slug",
+        "status_id",
+        "description"
+    ];
+
+
+    public function status(){
+        return $this -> belongsTo(Status::class);
+    }
+
+
+    public function types(){
+        return $this -> morphToMany(Type::class,"typeable");
+    }
+
 }

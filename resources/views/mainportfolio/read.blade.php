@@ -112,14 +112,6 @@
     <!-- start show edition video -->
     <section class=" show_edition">
         <div class="container">
-            <!-- start global title -->
-            <!-- <div class="global_title">
-                <h3 class="text-center text-uppercase">Working Experience</h3>
-                <p class="text-muted text-center ">
-                    Whose given. Were gathered. There first subdue greater. Bearing you Whales heaven midst their. Beast creepeth. Fish days.
-                </p>
-            </div> -->
-            <!-- end global title -->
             <div class="wow animate__zoomIn p-1 p-md-3 p-lg-5  show_edition_container">
                 @foreach($videos as $video)
                 <video controls src="{{asset('assets/videos/'.$video->name)}}" class="w-100"></video>
@@ -134,87 +126,34 @@
         <div class="">
             <div class="container">
                 <!-- start global title -->
-                <!-- <div class="mb-3 global_title">
+                <div class="mb-3 global_title">
                     <h3 class="text-center text-uppercase">Related Products</h3>
                    
-                </div> -->
+                </div> 
                 <!-- end global title -->
-                <!-- <div class="row">
+                <div class="row">
+                    @foreach($relportfolios as $relportfolio)
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                         <div class="port_folio_content_container"> 
-                            <a href="#" class="nav-link">
+                            <a href="{{route('mainportfolio.show',$relportfolio->id)}}" class="nav-link">
                                 <div class="portfolio_img_container">
                                     <div class="over_layer_primary"></div>
                                     <div class="over_layer_secondary"></div>
                                     <div class="portfolio_link">
-                                        <a href="#" class="nav-link"><i class="fas fa-link"></i></a>
+                                        <a href="{{route('mainportfolio.show',$relportfolio->id)}}" class="nav-link"><i class="fas fa-link"></i></a>
                                     </div>
-                                    <img src="{{asset('./assets/imgs/gallery/aungmyintmo.png')}}" width="100%" alt="aungmyintmo">
+                                    <img src="{{asset('assets/imgs/logos/'.$relportfolio->image)}}" width="100%" alt="{{$relportfolio->name}}">
                                 </div>
                                 <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Aung Myint Mo</h4>
+                                    <h4 class="fw-light text-center">{{$relportfolio->name}}</h4>
                                 </div>
                             </a>
                         </div>
 
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="#" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="#" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="{{asset('./assets/imgs/gallery/bo.jpg')}}" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Bo Mobile</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="#" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="#" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="{{asset('./assets/imgs/gallery/crystal_dream.jpg')}}" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">Crystal Dream</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
-                        <div class="port_folio_content_container"> 
-                            <a href="#" class="nav-link">
-                                <div class="portfolio_img_container">
-                                    <div class="over_layer_primary"></div>
-                                    <div class="over_layer_secondary"></div>
-                                    <div class="portfolio_link">
-                                        <a href="#" class="nav-link"><i class="fas fa-link"></i></a>
-                                    </div>
-                                    <img src="{{asset('./assets/imgs/gallery/issac.jpg')}}" width="100%" alt="aungmyintmo">
-                                </div>
-                                <div class="img_title mt-3">
-                                    <h4 class="fw-light text-center">ISSAC Server</h4>
-                                </div>
-                            </a>
-                        </div>
-                        
-                    </div>
+                    @endforeach
 
-                    
-                </div> -->
+                </div> 
             </div>
         </div>
     </section>

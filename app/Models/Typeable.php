@@ -19,4 +19,7 @@ class Typeable extends Model
         "typeable_id",
         "typeable_type"
     ];
+
+
+
 }

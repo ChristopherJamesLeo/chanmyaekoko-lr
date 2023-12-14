@@ -26,6 +26,10 @@ use App\Http\Controllers\TitlesController;
 use App\Http\Controllers\VideosController;
 
 
+use App\Models\Portfolio;
+use App\Models\Type;
+
+
 
 
 /*
@@ -79,6 +83,18 @@ Route::middleware('auth')->group(function () {
     Route::resource("/titles",TitlesController::class);
     Route::resource("/statuses",StatusesController::class);
 
+});
+
+Route::get("portfolio/{id}/type",function($id){
+    $types = Portfolio::findOrFail($id)->types;
+
+    return $types;
+});
+
+Route::get("type/{id}/portfolios",function($id){
+    $portfolios = Type::findOrFail($id)->typeables;
+
+    return $portfolios;
 });
 
 
