@@ -69,9 +69,9 @@
                             <div class="col-lg-12 mb-2">
                                 <div class="form-group">
                                     <select name="type[]" id="select_type" class="form-control form-control-md shadow-none outline-none" multiple data-placeholder="Select Product Type">
-                                        @foreach($types as $type)
-                                            <option value="{{$type->id}}">
-                                                {{$type->name}}
+                                        @foreach($producttypes as $producttype)
+                                            <option value="{{$producttype->id}}">
+                                                {{$producttype->name}}
                                             </option>
                                         @endforeach
                                     </select>

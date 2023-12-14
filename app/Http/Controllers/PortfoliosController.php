@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Image;
 use App\Models\Video;
 use App\Models\Portfolio;
-use App\Models\Tag;
+use App\Models\Typeable;
 use App\Models\Type;
 use App\Models\Title;
 use App\Models\Status;
@@ -45,7 +46,7 @@ class PortfoliosController extends Controller
         ]);
 
         $portfolio = new Portfolio;
-        
+        $userId = Auth::user()->id;
         $portfolio -> name = $request["name"];
         $portfolio -> kind = $request["kind"];
         $portfolio -> description = $request["description"];
@@ -75,10 +76,11 @@ class PortfoliosController extends Controller
 
         foreach($types as $type){
 
-            Tag::create([
+            Typeable::create([
                 "type_id" => $type,
-                "taggable_id" => $portfolioId,
-                "taggable_type" => "App\Models\Portfolio"
+                "user_id" => $userId,
+                "typeable_id" => $portfolioId,
+                "typeable_type" => "App\Models\Portfolio"
             ]);
         }
 
@@ -126,22 +128,20 @@ class PortfoliosController extends Controller
     {
         $portfolio = Portfolio::findOrFail($id);
 
-        $tags = Tag::where("taggable_id",$id)->get();
+        $typeables = Typeable::where("typeable_id",$id)->get();
 
         $typename = "";
 
-        foreach($tags as $tag){
-            $tag -> type_id;
+        foreach($typeables as $typeable){
+            $typeable -> type_id;
 
-            $types = Type::where("id",$tag->type_id)->get();
+            $types = Type::where("id",$typeable->type_id)->get();
             
             // echo $types;
             foreach($types as $type){
                 // echo $type -> name;
                 $typename .= $type -> name." / ";
             }
-
-            
             
         }
 
@@ -162,28 +162,31 @@ class PortfoliosController extends Controller
 
         $statuses = Status::all();
 
-        $types = Type::all();
+        $producttypes = Type::all();
 
-        $tags = Tag::where("taggable_id",$id)->get();
+
+        $typeables = Typeable::where("typeable_id",$id)->get();      
 
         $typename = "";
 
-        foreach($tags as $tag){
-            $tag -> type_id;
-
-            $types = Type::where("id",$tag->type_id)->get();
+        foreach($typeables as $typeable){
             
+           
+            $types = Type::where("id",$typeable->type_id)->get();
+            
+
             foreach($types as $type){
                 $typename .= $type -> name." / ";
             }
 
-        }
+        } 
+        
 
         $images = Image::where("taggable",$id)->get();
 
         $videos = Video::where("taggable",$id) -> get();
 
-        return view("portfolios.edit",compact("portfolio","images","videos","types","statuses","typename"));
+        return view("portfolios.edit",compact("portfolio","images","videos","producttypes","statuses","typename"));
 
     }
 
@@ -200,7 +203,7 @@ class PortfoliosController extends Controller
         ]);
 
         $portfolio = Portfolio::findOrFail($id);
-        
+        $userId = Auth::user()->id;
         $portfolio -> name = $request["name"];
         $portfolio -> kind = $request["kind"];
         $portfolio -> status_id = $request["status_id"];
@@ -231,17 +234,18 @@ class PortfoliosController extends Controller
         $types = $request["type"];
 
         if($types){
-            $tags = Tag::where("taggable_id",$id)->get();
+            $typeables = Typeable::where("typeable_id",$id)->get();
 
-            foreach($tags as $tag){
-                $tag -> delete();
+            foreach($typeables as $typeable){
+                $typeable -> delete();
             }
 
             foreach($types as $type){
-                Tag::create([
+                Typeable::create([
                     "type_id" => $type,
-                    "taggable_id" => $id,
-                    "taggable_type" => "App\Models\Portfolio"
+                    "user_id" => $userId,
+                    "typeable_id" => $portfolio -> id,
+                    "typeable_type" => "App\Models\Portfolio"
                 ]);
             }
         }
@@ -337,10 +341,10 @@ class PortfoliosController extends Controller
 
         $portfolio->delete();
 
-        $tags = Tag::where("taggable_id",$id)->get();
+        $typeables = Typeable::where("typeable_id",$id)->get();
 
-        foreach($tags as $tag){
-            $tag -> delete();
+        foreach($typeables as $typeable){
+            $typeable -> delete();
         }
 
         $images = Image::where("taggable",$id)->get();
